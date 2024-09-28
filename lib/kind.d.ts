@@ -6,6 +6,7 @@ import {
   ChainableExpression,
   ClassBody,
   ClassEntry,
+  ConstructorFunctionExpression,
   ConstructorIdentifier,
   DeclarableExpression,
   DeclarablePattern,
@@ -14,6 +15,7 @@ import {
   ExportSpecifier,
   Expression,
   FunctionExpression,
+  GetterFunctionExpression,
   ImportSpecifier,
   Key,
   KeyIdentifier,
@@ -27,6 +29,7 @@ import {
   PublicKeyIdentifier,
   RestablePattern,
   RestablePatternProperty,
+  SetterFunctionExpression,
   SourceLiteral,
   Specifier,
   SpreadableExpression,
@@ -43,6 +46,9 @@ import {
 
 export type KindRecord<X> = {
   FunctionExpression: FunctionExpression<X>;
+  ConstructorFunctionExpression: ConstructorFunctionExpression<X>;
+  GetterFunctionExpression: GetterFunctionExpression<X>;
+  SetterFunctionExpression: SetterFunctionExpression<X>;
   DeclarableExpression: DeclarableExpression<X>;
   Program: Program<X>;
   Expression: Expression<X>;

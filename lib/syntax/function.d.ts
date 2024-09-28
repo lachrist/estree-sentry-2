@@ -1,6 +1,6 @@
 import type { Expression } from "./expression";
 import type { VariableIdentifier } from "./identifier";
-import type { RestablePattern } from "./pattern";
+import type { Pattern, RestablePattern } from "./pattern";
 import type { BlockStatement } from "./statement";
 
 export type FunctionExpression<X> = (X extends null ? {} : X) & {
@@ -9,6 +9,33 @@ export type FunctionExpression<X> = (X extends null ? {} : X) & {
   async: boolean;
   generator: boolean;
   params: RestablePattern<X>[];
+  body: BlockStatement<X>;
+};
+
+export type ConstructorFunctionExpression<X> = (X extends null ? {} : X) & {
+  type: "FunctionExpression";
+  id: null;
+  async: false;
+  generator: false;
+  params: RestablePattern<X>[];
+  body: BlockStatement<X>;
+};
+
+export type GetterFunctionExpression<X> = (X extends null ? {} : X) & {
+  type: "FunctionExpression";
+  id: null;
+  async: false;
+  generator: false;
+  params: [];
+  body: BlockStatement<X>;
+};
+
+export type SetterFunctionExpression<X> = (X extends null ? {} : X) & {
+  type: "FunctionExpression";
+  id: null;
+  async: false;
+  generator: false;
+  params: [Pattern<X>];
   body: BlockStatement<X>;
 };
 

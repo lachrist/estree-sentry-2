@@ -22,8 +22,12 @@ import {
   ClassDeclaration,
   ClassBody,
   ConstructorMethodDefinition,
-  ComputedMethodDefinition,
-  NonComputedMethodDefinition,
+  ComputedPlainMethodDefinition,
+  NonComputedPlainMethodDefinition,
+  ComputedGetterMethodDefinition,
+  NonComputedGetterMethodDefinition,
+  ComputedSetterMethodDefinition,
+  NonComputedSetterMethodDefinition,
   ComputedPropertyDefinition,
   NonComputedPropertyDefinition,
   StaticBlock,
@@ -102,8 +106,10 @@ import {
   ComputedPlainObjectProperty,
   NonComputedMethodObjectProperty,
   ComputedMethodObjectProperty,
-  NonComputedAccessorObjectProperty,
-  ComputedAccessorObjectProperty,
+  ComputedGetterObjectProperty,
+  NonComputedGetterObjectProperty,
+  ComputedSetterObjectProperty,
+  NonComputedSetterObjectProperty,
 } from "./syntax/object";
 import {
   NonComputedPatternProperty,
@@ -163,8 +169,12 @@ export type Node<X> =
   | AnonymousClassDeclaration<X>
   | ClassBody<X>
   | ConstructorMethodDefinition<X>
-  | ComputedMethodDefinition<X>
-  | NonComputedMethodDefinition<X>
+  | ComputedPlainMethodDefinition<X>
+  | NonComputedPlainMethodDefinition<X>
+  | ComputedGetterMethodDefinition<X>
+  | NonComputedGetterMethodDefinition<X>
+  | ComputedSetterMethodDefinition<X>
+  | NonComputedSetterMethodDefinition<X>
   | ComputedPropertyDefinition<X>
   | NonComputedPropertyDefinition<X>
   | StaticBlock<X>
@@ -229,8 +239,10 @@ export type Node<X> =
   | ComputedPlainObjectProperty<X>
   | NonComputedMethodObjectProperty<X>
   | ComputedMethodObjectProperty<X>
-  | NonComputedAccessorObjectProperty<X>
-  | ComputedAccessorObjectProperty<X>
+  | ComputedGetterObjectProperty<X>
+  | NonComputedGetterObjectProperty<X>
+  | ComputedSetterObjectProperty<X>
+  | NonComputedSetterObjectProperty<X>
   | NonComputedPatternProperty<X>
   | ComputedPatternProperty<X>
   | RestElement<X>

@@ -1,5 +1,10 @@
 import type { Expression } from "./expression";
-import type { FunctionExpression } from "./function";
+import type {
+  ConstructorFunctionExpression,
+  FunctionExpression,
+  GetterFunctionExpression,
+  SetterFunctionExpression,
+} from "./function";
 import type { ConstructorIdentifier, VariableIdentifier } from "./identifier";
 import type { Key } from "./key";
 import type { Statement } from "./statement";
@@ -39,32 +44,89 @@ export type ClassBody<X> = (X extends null ? {} : X) & {
 
 export type MethodDefinition<X> =
   | ConstructorMethodDefinition<X>
-  | ComputedMethodDefinition<X>
-  | NonComputedMethodDefinition<X>;
+  | PlainMethodDefinition<X>
+  | GetterMethodDefinition<X>
+  | SetterMethodDefinition<X>;
+
+// ConstructorMethod //
 
 export type ConstructorMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: ConstructorIdentifier<X>;
-  value: FunctionExpression<X>;
+  value: ConstructorFunctionExpression<X>;
   kind: "constructor";
   computed: false;
   static: false;
 };
 
-export type ComputedMethodDefinition<X> = (X extends null ? {} : X) & {
+// PlainMethod //
+
+export type PlainMethodDefinition<X> =
+  | ComputedPlainMethodDefinition<X>
+  | NonComputedPlainMethodDefinition<X>;
+
+export type ComputedPlainMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: Expression<X>;
   value: FunctionExpression<X>;
-  kind: "method" | "get" | "set";
+  kind: "method";
   computed: true;
   static: boolean;
 };
 
-export type NonComputedMethodDefinition<X> = (X extends null ? {} : X) & {
+export type NonComputedPlainMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: Key<X>;
   value: FunctionExpression<X>;
-  kind: "method" | "get" | "set";
+  kind: "method";
+  computed: false;
+  static: boolean;
+};
+
+// GetterMethod //
+
+export type GetterMethodDefinition<X> =
+  | ComputedGetterMethodDefinition<X>
+  | NonComputedGetterMethodDefinition<X>;
+
+export type ComputedGetterMethodDefinition<X> = (X extends null ? {} : X) & {
+  type: "MethodDefinition";
+  key: Expression<X>;
+  value: GetterFunctionExpression<X>;
+  kind: "get";
+  computed: true;
+  static: boolean;
+};
+
+export type NonComputedGetterMethodDefinition<X> = (X extends null ? {} : X) & {
+  type: "MethodDefinition";
+  key: Key<X>;
+  value: GetterFunctionExpression<X>;
+  kind: "get";
+  computed: false;
+  static: boolean;
+};
+
+// SetterMethod //
+
+export type SetterMethodDefinition<X> =
+  | ComputedSetterMethodDefinition<X>
+  | NonComputedSetterMethodDefinition<X>;
+
+export type ComputedSetterMethodDefinition<X> = (X extends null ? {} : X) & {
+  type: "MethodDefinition";
+  key: Expression<X>;
+  value: SetterFunctionExpression<X>;
+  kind: "set";
+  computed: true;
+  static: boolean;
+};
+
+export type NonComputedSetterMethodDefinition<X> = (X extends null ? {} : X) & {
+  type: "MethodDefinition";
+  key: Key<X>;
+  value: SetterFunctionExpression<X>;
+  kind: "set";
   computed: false;
   static: boolean;
 };
