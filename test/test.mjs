@@ -69,12 +69,15 @@ const checkNode = (node, root) => {
 
 /**
  * @type {(
- *   code: string,
+ *   code: string | import("estree").Program,
  *   type?: "module" | "script",
  * ) => void}
  */
 export const pass = (code, type = "script") => {
-  const root1 = parse(code, { ecmaVersion: 2024, sourceType: type });
+  const root1 =
+    typeof code === "string"
+      ? parse(code, { ecmaVersion: 2024, sourceType: type })
+      : code;
   const code1 = generate(root1);
   const root2 = guard(root1, ROOT_PATH, annotate);
   checkNode(root2, root2);
@@ -86,17 +89,21 @@ export const pass = (code, type = "script") => {
 
 /**
  * @type {(
- *   root: import("estree").Program,
+ *   root: string | import("estree").Program,
  * ) => void}
  */
-export const fail = (root) => {
+export const fail = (code, type = "script") => {
+  const root1 =
+    typeof code === "string"
+      ? parse(code, { ecmaVersion: 2024, sourceType: type })
+      : code;
   try {
-    guard(root, ROOT_PATH, annotate);
+    guard(root1, ROOT_PATH, annotate);
   } catch (error) {
     if (!(error instanceof PreciseEstreeSyntaxError)) {
       throw error;
     }
     return undefined;
   }
-  throw new TestError("missing error", { root });
+  throw new TestError("missing error", { code, root1 });
 };
