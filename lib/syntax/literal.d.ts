@@ -21,6 +21,7 @@ export type PublicKeyLiteral<X> =
 export type SourceLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: SourceBrand;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -28,6 +29,7 @@ export type SourceLiteral<X> = (X extends null ? {} : X) & {
 export type SpecifierLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: SpecifierBrand;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -35,6 +37,7 @@ export type SpecifierLiteral<X> = (X extends null ? {} : X) & {
 export type PublicObjectKeyStringLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: PublicKeyBrand;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -42,6 +45,7 @@ export type PublicObjectKeyStringLiteral<X> = (X extends null ? {} : X) & {
 export type StringLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: string;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -49,6 +53,7 @@ export type StringLiteral<X> = (X extends null ? {} : X) & {
 export type NumberLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: number;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -56,6 +61,7 @@ export type NumberLiteral<X> = (X extends null ? {} : X) & {
 export type NullLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -63,6 +69,7 @@ export type NullLiteral<X> = (X extends null ? {} : X) & {
 export type BooleanLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: boolean;
+  raw: null | string;
   bigint: null;
   regex: null;
 };
@@ -70,6 +77,7 @@ export type BooleanLiteral<X> = (X extends null ? {} : X) & {
 export type BigIntLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
+  raw: null | string;
   bigint: string;
   regex: null;
 };
@@ -77,6 +85,7 @@ export type BigIntLiteral<X> = (X extends null ? {} : X) & {
 export type RegExpLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
+  raw: null | string;
   bigint: null;
   regex: {
     pattern: string;
