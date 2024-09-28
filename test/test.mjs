@@ -1,6 +1,7 @@
 import { generate } from "astring";
 import { parse } from "acorn";
 import {
+  PreciseEstreeSyntaxError,
   guard,
   listChildren,
   ROOT_PATH,
@@ -8,12 +9,7 @@ import {
   walkPath,
 } from "../lib/index.mjs";
 import { compileAnnotate } from "./annotate.mjs";
-
-const {
-  console: { log },
-} = /** @type {{console: import("./console").Console}} */ (
-  /** @type {unknown} */ (globalThis)
-);
+import { TestError } from "./error.mjs";
 
 /**
  * @type {(
@@ -24,10 +20,10 @@ const {
 const checkNode = (node, root) => {
   const segments = splitPath(node.path, root.path);
   if (segments === null) {
-    throw new Error("Could not split path");
+    throw new TestError("Could not split path", { node, root });
   }
   if (node !== walkPath(segments, root)) {
-    throw new Error("Could not walk path");
+    throw new TestError("Could not walk path", { segments, root, node });
   }
   for (const child of listChildren(node)) {
     checkNode(child, root);
@@ -39,17 +35,30 @@ const checkNode = (node, root) => {
  *   code: string,
  * ) => void}
  */
-export const test = (code) => {
+export const pass = (code) => {
   const root1 = parse(code, { ecmaVersion: 2024 });
   const code1 = generate(root1);
   const root2 = guard(root1, ROOT_PATH, compileAnnotate());
   checkNode(root2, root2);
   const code2 = generate(root2);
   if (code1 !== code2) {
-    log("\nExpect:\n======\n");
-    log(code1);
-    log("\nActual:\n======\n");
-    log(code2);
-    throw new Error("code mismatch");
+    throw new TestError("code mismatch", { code, code1, code2, root1, root2 });
   }
+};
+
+/**
+ * @type {(
+ *   root: import("estree").Program,
+ * ) => void}
+ */
+export const fail = (root) => {
+  try {
+    guard(root, ROOT_PATH, compileAnnotate());
+  } catch (error) {
+    if (!(error instanceof PreciseEstreeSyntaxError)) {
+      throw error;
+    }
+    return undefined;
+  }
+  throw new TestError("missing error", { root });
 };

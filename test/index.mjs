@@ -1,3 +1,3 @@
-import { test } from "./test.mjs";
+Error.stackTraceLimit = Infinity;
 
-test("123;");
+import("./cases/call.mjs");

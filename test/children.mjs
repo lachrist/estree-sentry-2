@@ -1,5 +1,6 @@
 import { listChildren as listChildrenTestee } from "../lib/index.mjs";
 import { SEGMENT_RECORD } from "../lib/index.mjs";
+import { TestError } from "./error.mjs";
 
 const {
   Array: { isArray },
@@ -56,12 +57,16 @@ const listChildren = (node) => {
   const set = new Set(children);
   for (const child of listValueArray(node)) {
     if (set.has(child)) {
-      throw new Error("listChildren should return a new array");
+      throw new TestError("listChildren should return a new array", {
+        node,
+        children,
+        child,
+      });
     }
   }
   for (const child of listChildrenOracle(node)) {
     if (!set.has(child)) {
-      throw new Error("Missing child");
+      throw new TestError("missing child", { node, children, child });
     }
   }
   return children;

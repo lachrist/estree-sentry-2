@@ -1,7 +1,36 @@
-import { test } from "../test.mjs";
+import { fail, pass } from "../test.mjs";
 
-test("f(x1, x2);");
+pass("f(x, ...ys, z);");
 
-test("super(x1, x2);");
+pass(`
+  (class c extends d {
+    constructor () {
+      super(x, ...ys, z);
+    }
+  });
+`);
 
-test("f?.(x1, x2);");
+pass("f?.(x, ...ys, z);");
+
+fail({
+  type: "Program",
+  sourceType: "script",
+  body: [
+    {
+      type: "ExpressionStatement",
+      expression: {
+        type: "CallExpression",
+        optional: true,
+        callee: {
+          type: "Super",
+        },
+        arguments: [
+          {
+            type: "Identifier",
+            name: "x",
+          },
+        ],
+      },
+    },
+  ],
+});

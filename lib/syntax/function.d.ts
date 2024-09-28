@@ -18,6 +18,7 @@ export type ArrowFunctionExpression<X> =
 
 export type ExpressionArrowFunctionExpression<X> = (X extends null ? {} : X) & {
   type: "ArrowFunctionExpression";
+  id: null;
   async: boolean;
   generator: false;
   params: RestablePattern<X>[];
@@ -27,6 +28,7 @@ export type ExpressionArrowFunctionExpression<X> = (X extends null ? {} : X) & {
 
 export type BlockArrowFunctionExpression<X> = (X extends null ? {} : X) & {
   type: "ArrowFunctionExpression";
+  id: null;
   async: boolean;
   generator: false;
   params: RestablePattern<X>[];

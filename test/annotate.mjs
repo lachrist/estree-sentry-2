@@ -1,4 +1,5 @@
 import { KIND_RECORD } from "../lib/index.mjs";
+import { TestError } from "./error.mjs";
 
 const {
   Object: { hasOwn },
@@ -18,21 +19,25 @@ export const compileAnnotate = () => {
   const weakset = new WeakSet();
   return (node, path, kind) => {
     if (!hasOwn(node, "type")) {
-      throw new Error("missing node type");
+      throw new TestError("missing node type", { node, path, kind });
     }
     const { type } = /** @type {{type: unknown}} */ (node);
     if (typeof type !== "string") {
-      throw new Error("node type is not a string");
+      throw new TestError("node type is not a string", { node, path, kind });
     }
     if (weakset.has(node)) {
-      throw new Error("annotate called twice on same node");
+      throw new TestError("annotate called twice on same node", {
+        node,
+        path,
+        kind,
+      });
     }
     weakset.add(node);
     if (!hasOwn(KIND_RECORD, kind)) {
-      throw new Error("invalid kind");
+      throw new TestError("invalid kind", { node, path, kind });
     }
     if (!hasOwn(KIND_RECORD[kind], type)) {
-      throw new Error("invalid type for kind");
+      throw new TestError("invalid type for kind", { node, path, kind });
     }
     return { path };
   };
