@@ -16,6 +16,6 @@
   "scripts": {
     "test:cov": "node test/index.mjs cov",
     "test:reg": "node test/index.mjs reg",
-    "test:cov:reg": "npx c8 --reporter html -- node test/index.mjs reg & open coverage/index.html"
+    "test:cov:reg": "npx c8 --reporter html -- node test/index.mjs reg"
   }
 }
