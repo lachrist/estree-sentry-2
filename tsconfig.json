@@ -10,8 +10,7 @@
     "target": "es2022",
     "module": "es2022",
     "typeRoots": ["./node_modules/@types"],
-    "exactOptionalPropertyTypes": true,
-    "skipLibCheck": true
+    "exactOptionalPropertyTypes": true
   },
   "include": ["./lib/", "./test/"]
 }
