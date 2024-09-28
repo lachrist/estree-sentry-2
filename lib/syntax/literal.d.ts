@@ -18,63 +18,63 @@ export type PublicKeyLiteral<X> =
   | NullLiteral<X>
   | BigIntLiteral<X>;
 
-export type SourceLiteral<X> = X & {
+export type SourceLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: SourceBrand;
   bigint: null;
   regex: null;
 };
 
-export type SpecifierLiteral<X> = X & {
+export type SpecifierLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: SpecifierBrand;
   bigint: null;
   regex: null;
 };
 
-export type PublicObjectKeyStringLiteral<X> = X & {
+export type PublicObjectKeyStringLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: PublicKeyBrand;
   bigint: null;
   regex: null;
 };
 
-export type StringLiteral<X> = X & {
+export type StringLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: string;
   bigint: null;
   regex: null;
 };
 
-export type NumberLiteral<X> = X & {
+export type NumberLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: number;
   bigint: null;
   regex: null;
 };
 
-export type NullLiteral<X> = X & {
+export type NullLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
   bigint: null;
   regex: null;
 };
 
-export type BooleanLiteral<X> = X & {
+export type BooleanLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: boolean;
   bigint: null;
   regex: null;
 };
 
-export type BigIntLiteral<X> = X & {
+export type BigIntLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
   bigint: string;
   regex: null;
 };
 
-export type RegExpLiteral<X> = X & {
+export type RegExpLiteral<X> = (X extends null ? {} : X) & {
   type: "Literal";
   value: null;
   bigint: null;

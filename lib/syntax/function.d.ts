@@ -3,13 +3,7 @@ import type { VariableIdentifier } from "./identifier";
 import type { RestablePattern } from "./pattern";
 import type { BlockStatement } from "./statement";
 
-export type Function<X> =
-  | FunctionExpression<X>
-  | ArrowFunctionExpression<X>
-  | FunctionDeclaration<X>
-  | AnonymousFunctionDeclaration<X>;
-
-export type FunctionExpression<X> = X & {
+export type FunctionExpression<X> = (X extends null ? {} : X) & {
   type: "FunctionExpression";
   id: VariableIdentifier<X> | null;
   async: boolean;
@@ -19,24 +13,28 @@ export type FunctionExpression<X> = X & {
 };
 
 export type ArrowFunctionExpression<X> =
-  | (X & {
-      type: "ArrowFunctionExpression";
-      async: boolean;
-      generator: false;
-      params: RestablePattern<X>[];
-      expression: true;
-      body: Expression<X>;
-    })
-  | (X & {
-      type: "ArrowFunctionExpression";
-      async: boolean;
-      generator: false;
-      params: RestablePattern<X>[];
-      expression: false;
-      body: BlockStatement<X>;
-    });
+  | ExpressionArrowFunctionExpression<X>
+  | BlockArrowFunctionExpression<X>;
 
-export type FunctionDeclaration<X> = X & {
+export type ExpressionArrowFunctionExpression<X> = (X extends null ? {} : X) & {
+  type: "ArrowFunctionExpression";
+  async: boolean;
+  generator: false;
+  params: RestablePattern<X>[];
+  expression: true;
+  body: Expression<X>;
+};
+
+export type BlockArrowFunctionExpression<X> = (X extends null ? {} : X) & {
+  type: "ArrowFunctionExpression";
+  async: boolean;
+  generator: false;
+  params: RestablePattern<X>[];
+  expression: false;
+  body: BlockStatement<X>;
+};
+
+export type FunctionDeclaration<X> = (X extends null ? {} : X) & {
   type: "FunctionDeclaration";
   params: RestablePattern<X>[];
   id: VariableIdentifier<X>;
@@ -45,7 +43,7 @@ export type FunctionDeclaration<X> = X & {
   body: BlockStatement<X>;
 };
 
-export type AnonymousFunctionDeclaration<X> = X & {
+export type AnonymousFunctionDeclaration<X> = (X extends null ? {} : X) & {
   type: "FunctionDeclaration";
   params: RestablePattern<X>[];
   id: null;

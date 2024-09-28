@@ -11,7 +11,7 @@ export type OptionalExpression<X> =
   | OptionalCallExpression<X>
   | OptionalMemberExpression<X>;
 
-export type ChainExpression<X> = X & {
+export type ChainExpression<X> = (X extends null ? {} : X) & {
   type: "ChainExpression";
   expression: OptionalExpression<X>;
 };

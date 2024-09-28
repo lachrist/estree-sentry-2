@@ -4,38 +4,33 @@ import type { ConstructorIdentifier, VariableIdentifier } from "./identifier";
 import type { Key } from "./key";
 import type { Statement } from "./statement";
 
-export type Class<X> =
-  | ClassExpression<X>
-  | ClassDeclaration<X>
-  | AnonymousClassDeclaration<X>;
-
 export type ClassEntry<X> =
   | MethodDefinition<X>
   | PropertyDefinition<X>
   | StaticBlock<X>;
 
-export type ClassExpression<X> = X & {
+export type ClassExpression<X> = (X extends null ? {} : X) & {
   type: "ClassExpression";
   id: VariableIdentifier<X> | null;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type AnonymousClassDeclaration<X> = X & {
+export type AnonymousClassDeclaration<X> = (X extends null ? {} : X) & {
   type: "ClassDeclaration";
   id: null;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type ClassDeclaration<X> = X & {
+export type ClassDeclaration<X> = (X extends null ? {} : X) & {
   type: "ClassDeclaration";
   id: VariableIdentifier<X>;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type ClassBody<X> = X & {
+export type ClassBody<X> = (X extends null ? {} : X) & {
   type: "ClassBody";
   body: Array<ClassEntry<X>>;
 };
@@ -47,7 +42,7 @@ export type MethodDefinition<X> =
   | ComputedMethodDefinition<X>
   | NonComputedMethodDefinition<X>;
 
-export type ConstructorMethodDefinition<X> = X & {
+export type ConstructorMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: ConstructorIdentifier<X>;
   value: FunctionExpression<X>;
@@ -56,7 +51,7 @@ export type ConstructorMethodDefinition<X> = X & {
   static: false;
 };
 
-export type ComputedMethodDefinition<X> = X & {
+export type ComputedMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: Expression<X>;
   value: FunctionExpression<X>;
@@ -65,7 +60,7 @@ export type ComputedMethodDefinition<X> = X & {
   static: boolean;
 };
 
-export type NonComputedMethodDefinition<X> = X & {
+export type NonComputedMethodDefinition<X> = (X extends null ? {} : X) & {
   type: "MethodDefinition";
   key: Key<X>;
   value: FunctionExpression<X>;
@@ -80,7 +75,7 @@ export type PropertyDefinition<X> =
   | ComputedPropertyDefinition<X>
   | NonComputedPropertyDefinition<X>;
 
-export type ComputedPropertyDefinition<X> = X & {
+export type ComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
   type: "PropertyDefinition";
   key: Expression<X>;
   value: Expression<X> | null;
@@ -88,7 +83,7 @@ export type ComputedPropertyDefinition<X> = X & {
   static: boolean;
 };
 
-export type NonComputedPropertyDefinition<X> = X & {
+export type NonComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
   type: "PropertyDefinition";
   key: Key<X>;
   value: Expression<X> | null;
@@ -98,7 +93,7 @@ export type NonComputedPropertyDefinition<X> = X & {
 
 // StaticBlock //
 
-export type StaticBlock<X> = X & {
+export type StaticBlock<X> = (X extends null ? {} : X) & {
   type: "StaticBlock";
   body: Statement<X>[];
 };

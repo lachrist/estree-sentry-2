@@ -10,13 +10,13 @@ export type Declaration<X> =
   | FunctionDeclaration<X>
   | ClassDeclaration<X>;
 
-export type VariableDeclaration<X> = X & {
+export type VariableDeclaration<X> = (X extends null ? {} : X) & {
   type: "VariableDeclaration";
   declarations: VariableDeclarator<X>[];
   kind: VariableKind;
 };
 
-export type VariableDeclarator<X> = X & {
+export type VariableDeclarator<X> = (X extends null ? {} : X) & {
   type: "VariableDeclarator";
   id: Pattern<X>;
   init: Expression<X> | null;

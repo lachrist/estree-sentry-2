@@ -9,7 +9,7 @@ export type ObjectProperty<X> =
   | MethodObjectProperty<X>
   | AccessorObjectProperty<X>;
 
-export type ObjectExpression<X> = X & {
+export type ObjectExpression<X> = (X extends null ? {} : X) & {
   type: "ObjectExpression";
   properties: Array<SpreadableObjectProperty<X>>;
 };
@@ -20,7 +20,7 @@ export type PlainObjectProperty<X> =
   | NonComputedPlainObjectProperty<X>
   | ComputedPlainObjectProperty<X>;
 
-export type NonComputedPlainObjectProperty<X> = X & {
+export type NonComputedPlainObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: PublicKey<X>;
   value: Expression<X>;
@@ -30,7 +30,7 @@ export type NonComputedPlainObjectProperty<X> = X & {
   computed: false;
 };
 
-export type ComputedPlainObjectProperty<X> = X & {
+export type ComputedPlainObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: Expression<X>;
   value: Expression<X>;
@@ -46,7 +46,7 @@ export type MethodObjectProperty<X> =
   | NonComputedMethodObjectProperty<X>
   | ComputedMethodObjectProperty<X>;
 
-export type NonComputedMethodObjectProperty<X> = X & {
+export type NonComputedMethodObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: PublicKey<X>;
   value: FunctionExpression<X>;
@@ -56,7 +56,7 @@ export type NonComputedMethodObjectProperty<X> = X & {
   computed: false;
 };
 
-export type ComputedMethodObjectProperty<X> = X & {
+export type ComputedMethodObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: Expression<X>;
   value: FunctionExpression<X>;
@@ -72,7 +72,7 @@ export type AccessorObjectProperty<X> =
   | NonComputedAccessorObjectProperty<X>
   | ComputedAccessorObjectProperty<X>;
 
-export type NonComputedAccessorObjectProperty<X> = X & {
+export type NonComputedAccessorObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: PublicKey<X>;
   value: FunctionExpression<X>;
@@ -82,7 +82,7 @@ export type NonComputedAccessorObjectProperty<X> = X & {
   computed: false;
 };
 
-export type ComputedAccessorObjectProperty<X> = X & {
+export type ComputedAccessorObjectProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: Expression<X>;
   value: FunctionExpression<X>;

@@ -10,7 +10,7 @@ export type OptionalMemberExpression<X> =
   | OptionalComputedMemberExpression<X>
   | OptionalNonComputedMemberExpression<X>;
 
-export type ComputedMemberExpression<X> = X & {
+export type ComputedMemberExpression<X> = (X extends null ? {} : X) & {
   type: "MemberExpression";
   object: SuperableExpression<X>;
   property: Expression<X>;
@@ -18,7 +18,7 @@ export type ComputedMemberExpression<X> = X & {
   optional: false;
 };
 
-export type NonComputedMemberExpression<X> = X & {
+export type NonComputedMemberExpression<X> = (X extends null ? {} : X) & {
   type: "MemberExpression";
   object: SuperableExpression<X>;
   property: KeyIdentifier<X>;
@@ -26,7 +26,7 @@ export type NonComputedMemberExpression<X> = X & {
   optional: false;
 };
 
-export type OptionalComputedMemberExpression<X> = X & {
+export type OptionalComputedMemberExpression<X> = (X extends null ? {} : X) & {
   type: "MemberExpression";
   object: ChainableExpression<X>;
   property: Expression<X>;
@@ -34,7 +34,9 @@ export type OptionalComputedMemberExpression<X> = X & {
   optional: true;
 };
 
-export type OptionalNonComputedMemberExpression<X> = X & {
+export type OptionalNonComputedMemberExpression<X> = (X extends null
+  ? {}
+  : X) & {
   type: "MemberExpression";
   object: ChainableExpression<X>;
   property: KeyIdentifier<X>;

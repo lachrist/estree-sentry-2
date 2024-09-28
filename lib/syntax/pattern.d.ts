@@ -28,7 +28,7 @@ export type PatternProperty<X> =
 
 export type RestablePatternProperty<X> = PatternProperty<X> | RestElement<X>;
 
-export type NonComputedPatternProperty<X> = X & {
+export type NonComputedPatternProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: Key<X>;
   value: Pattern<X>;
@@ -38,7 +38,7 @@ export type NonComputedPatternProperty<X> = X & {
   computed: false;
 };
 
-export type ComputedPatternProperty<X> = X & {
+export type ComputedPatternProperty<X> = (X extends null ? {} : X) & {
   type: "Property";
   key: Expression<X>;
   value: Pattern<X>;
@@ -48,22 +48,22 @@ export type ComputedPatternProperty<X> = X & {
   computed: true;
 };
 
-export type RestElement<X> = X & {
+export type RestElement<X> = (X extends null ? {} : X) & {
   type: "RestElement";
   argument: Pattern<X>;
 };
 
-export type ObjectPattern<X> = X & {
+export type ObjectPattern<X> = (X extends null ? {} : X) & {
   type: "ObjectPattern";
   properties: Array<RestablePatternProperty<X>>;
 };
 
-export type ArrayPattern<X> = X & {
+export type ArrayPattern<X> = (X extends null ? {} : X) & {
   type: "ArrayPattern";
   elements: Array<Pattern<X> | RestElement<X> | null>;
 };
 
-export type AssignmentPattern<X> = X & {
+export type AssignmentPattern<X> = (X extends null ? {} : X) & {
   type: "AssignmentPattern";
   left: Pattern<X>;
   right: Expression<X>;
