@@ -10,7 +10,7 @@ export type CallExpression<X> = (X extends null ? {} : X) & {
 
 export type OptionalCallExpression<X> = (X extends null ? {} : X) & {
   type: "CallExpression";
-  optional: true;
+  optional: boolean;
   callee: ChainableExpression<X>;
   arguments: Array<SpreadableExpression<X>>;
 };

@@ -1,5 +1,4 @@
 import { argv, stdout, stderr } from "node:process";
-import { TestError } from "./error.mjs";
 import { spawn } from "./spawn.mjs";
 
 Error.stackTraceLimit = Infinity;
@@ -49,7 +48,7 @@ const reg = async (name) => {
     await import(`./cases/${name}.mjs`);
     return 0;
   } catch (error) {
-    if (error instanceof TestError) {
+    if (error instanceof Error) {
       stderr.write(`${error.stack}\n`);
       return 1;
     } else {

@@ -31,7 +31,7 @@ export type OptionalComputedMemberExpression<X> = (X extends null ? {} : X) & {
   object: ChainableExpression<X>;
   property: Expression<X>;
   computed: true;
-  optional: true;
+  optional: boolean;
 };
 
 export type OptionalNonComputedMemberExpression<X> = (X extends null
@@ -41,5 +41,5 @@ export type OptionalNonComputedMemberExpression<X> = (X extends null
   object: ChainableExpression<X>;
   property: KeyIdentifier<X>;
   computed: false;
-  optional: true;
+  optional: boolean;
 };

@@ -20,7 +20,6 @@ import {
   KeywordIdentifier,
   LabelIdentifier,
   ModuleStatement,
-  OptionalExpression,
   Pattern,
   PrivatableExpression,
   Program,
@@ -75,7 +74,6 @@ export type KindRecord<X> = {
   ImportSpecifier: ImportSpecifier<X>;
   LabelIdentifier: LabelIdentifier<X>;
   VariableIdentifier: VariableIdentifier<X>;
-  OptionalExpression: OptionalExpression<X>;
   ExportSpecifier: ExportSpecifier<X>;
   CallablePattern: CallablePattern<X>;
   Declaration: Declaration<X>;
