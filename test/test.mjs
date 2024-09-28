@@ -20,10 +20,19 @@ import { TestError } from "./error.mjs";
 const checkNode = (node, root) => {
   const segments = splitPath(node.path, root.path);
   if (segments === null) {
-    throw new TestError("Could not split path", { node, root });
+    throw new TestError("could not split path", { node, root });
   }
-  if (node !== walkPath(segments, root)) {
-    throw new TestError("Could not walk path", { segments, root, node });
+  const walk_node = walkPath(segments, root);
+  if (walk_node === null) {
+    throw new TestError("could not walk path", { segments, root, node });
+  }
+  if (walk_node !== node) {
+    throw new TestError("walk node mismatch", {
+      segments,
+      root,
+      node,
+      walk_node,
+    });
   }
   for (const child of listChildren(node)) {
     checkNode(child, root);
