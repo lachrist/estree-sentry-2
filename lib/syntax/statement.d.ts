@@ -3,7 +3,6 @@ import { VariableDeclaration } from "./declaration";
 import type { DeclarableExpression, Expression } from "./expression";
 import type { FunctionDeclaration } from "./function";
 import type { LabelIdentifier } from "./identifier";
-import type { ModuleDeclaration } from "./module";
 import type { DeclarablePattern, Pattern } from "./pattern";
 
 export type Statement<X> =
