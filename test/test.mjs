@@ -7,9 +7,37 @@ import {
   ROOT_PATH,
   splitPath,
   walkPath,
+  KIND_RECORD,
 } from "../lib/index.mjs";
-import { compileAnnotate } from "./annotate.mjs";
 import { TestError } from "./error.mjs";
+
+const {
+  Object: { hasOwn },
+} = globalThis;
+
+/**
+ * @type {(
+ *   node: object,
+ *   path: import("../lib").Path,
+ *   kind: import("../lib").Kind,
+ * ) => { path: import("../lib").Path }}
+ */
+export const annotate = (node, path, kind) => {
+  if (!hasOwn(node, "type")) {
+    throw new TestError("missing node type", { node, path, kind });
+  }
+  const { type } = /** @type {{type: unknown}} */ (node);
+  if (typeof type !== "string") {
+    throw new TestError("node type is not a string", { node, path, kind });
+  }
+  if (!hasOwn(KIND_RECORD, kind)) {
+    throw new TestError("invalid kind", { node, path, kind });
+  }
+  if (!hasOwn(KIND_RECORD[kind], type)) {
+    throw new TestError("invalid type for kind", { node, path, kind });
+  }
+  return { path };
+};
 
 /**
  * @type {(
@@ -42,12 +70,13 @@ const checkNode = (node, root) => {
 /**
  * @type {(
  *   code: string,
+ *   type?: "module" | "script",
  * ) => void}
  */
-export const pass = (code) => {
-  const root1 = parse(code, { ecmaVersion: 2024 });
+export const pass = (code, type = "script") => {
+  const root1 = parse(code, { ecmaVersion: 2024, sourceType: type });
   const code1 = generate(root1);
-  const root2 = guard(root1, ROOT_PATH, compileAnnotate());
+  const root2 = guard(root1, ROOT_PATH, annotate);
   checkNode(root2, root2);
   const code2 = generate(root2);
   if (code1 !== code2) {
@@ -62,7 +91,7 @@ export const pass = (code) => {
  */
 export const fail = (root) => {
   try {
-    guard(root, ROOT_PATH, compileAnnotate());
+    guard(root, ROOT_PATH, annotate);
   } catch (error) {
     if (!(error instanceof PreciseEstreeSyntaxError)) {
       throw error;
