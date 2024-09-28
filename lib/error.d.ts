@@ -1,6 +1,6 @@
 import { Primitive } from "./util/primitive";
 
-export class EstreexTypeError extends TypeError {
+export class PreciseEstreeTypeError extends TypeError {
   constructor(cause: never);
   message: string;
   cause: never;
@@ -15,7 +15,7 @@ export type SyntaxErrorCause = {
   actual: unknown;
 };
 
-export class EstreexSyntaxError extends SyntaxError {
+export class PreciseEstreeSyntaxError extends SyntaxError {
   constructor(message: string, cause: SyntaxErrorCause);
   message: string;
   cause: never;
