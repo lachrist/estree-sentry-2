@@ -1,7 +1,7 @@
 import type { Kind } from "./kind";
 import type { Path } from "./path";
 
-export type Annotate<X> = (node: object, kind: Kind, path: Path) => X;
+export type Annotate<X> = (node: object, path: Path, kind: Kind) => X;
 
 export type MarkerAnnotation = { __marker: null };
 
