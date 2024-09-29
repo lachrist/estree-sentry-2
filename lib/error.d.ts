@@ -5,7 +5,7 @@ import type { Primitive } from "./util/primitive";
 export class EstreeSentryTypeError extends TypeError {
   constructor(cause: never);
   message: string;
-  cause: never;
+  cause: unknown;
 }
 
 export type SyntaxErrorCause = {
@@ -18,7 +18,7 @@ export type SyntaxErrorCause = {
 };
 
 export class EstreeSentrySyntaxError extends SyntaxError {
-  constructor(message: string, cause: SyntaxErrorCause);
+  constructor(cause: SyntaxErrorCause);
   message: string;
-  cause: never;
+  cause: SyntaxErrorCause;
 }

@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["lib/index.mjs", "lib/**/*.d.ts"],
+  "githubPages": true,
+  "readme": "none",
+  "out": "page/typedoc",
+  "name": "estree-sentry",
+  "tsconfig": "tsconfig.json",
+  "visibilityFilters": {},
+  "entryPointStrategy": "expand",
+  "excludeExternals": true,
+  "externalPattern": ["**/node_modules/**"]
+}

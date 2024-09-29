@@ -1,48 +1,53 @@
 import {
+  CatchClause,
   BlockStatement,
+  Statement,
+  SwitchCase,
+} from "./syntax/statement";
+import { ChainableExpression } from "./syntax/chain";
+import {
   CallablePattern,
   CallableUpdatePattern,
-  CatchClause,
-  ChainableExpression,
-  ClassBody,
-  ClassEntry,
-  ConstructorFunctionExpression,
-  ConstructorIdentifier,
-  DeclarableExpression,
   DeclarablePattern,
-  Declaration,
-  DefaultDeclaration,
-  ExportSpecifier,
-  Expression,
-  FunctionExpression,
-  GetterFunctionExpression,
-  ImportSpecifier,
-  Key,
-  KeyIdentifier,
-  KeywordIdentifier,
-  LabelIdentifier,
-  ModuleStatement,
   Pattern,
-  PrivatableExpression,
-  Program,
-  PublicKey,
-  PublicKeyIdentifier,
   RestablePattern,
   RestablePatternProperty,
-  SetterFunctionExpression,
-  SourceLiteral,
-  Specifier,
-  SpreadableExpression,
-  SpreadableObjectProperty,
-  Statement,
-  SuperableExpression,
-  SwitchCase,
-  TemplateElement,
-  TemplateLiteral,
   UpdatePattern,
-  VariableDeclarator,
+} from "./syntax/pattern";
+import { ClassEntry, ClassBody } from "./syntax/class";
+import {
+  ConstructorFunctionExpression,
+  FunctionExpression,
+  GetterFunctionExpression,
+  SetterFunctionExpression,
+} from "./syntax/function";
+import { Declaration, VariableDeclarator } from "./syntax/declaration";
+import {
+  DefaultDeclaration,
+  ExportSpecifier,
+  ImportSpecifier,
+  ModuleStatement,
+  Specifier,
+} from "./syntax/module";
+import {
+  DeclarableExpression,
+  Expression,
+  PrivatableExpression,
+  SpreadableExpression,
+  SuperableExpression,
+} from "./syntax/expression";
+import { Program } from "./syntax/program";
+import { Key, KeyIdentifier, PublicKey } from "./syntax/key";
+import { SourceLiteral } from "./syntax/literal";
+import { SpreadableObjectProperty } from "./syntax/object";
+import { TemplateElement, TemplateLiteral } from "./syntax/template";
+import {
+  ConstructorIdentifier,
+  KeywordIdentifier,
+  LabelIdentifier,
+  PublicKeyIdentifier,
   VariableIdentifier,
-} from "./syntax";
+} from "./syntax/identifier";
 
 export type KindRecord<X> = {
   FunctionExpression: FunctionExpression<X>;
