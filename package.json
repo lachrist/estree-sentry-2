@@ -14,8 +14,8 @@
     "typescript": "^5.6.2"
   },
   "scripts": {
+    "test": "npx c8 -- node test/index.mjs reg",
     "test:cov": "node test/index.mjs cov",
-    "test:reg": "node test/index.mjs reg",
-    "test:cov:reg": "npx c8 --reporter html -- node test/index.mjs reg"
+    "test:reg": "node test/index.mjs reg"
   }
 }

@@ -1,4 +1,6 @@
-import { Primitive } from "./util/primitive";
+import type { Kind } from "./kind";
+import type { Path } from "./path";
+import type { Primitive } from "./util/primitive";
 
 export class PreciseEstreeTypeError extends TypeError {
   constructor(cause: never);
@@ -8,8 +10,8 @@ export class PreciseEstreeTypeError extends TypeError {
 
 export type SyntaxErrorCause = {
   node: object;
-  path: string;
-  kind: string;
+  path: Path;
+  kind: Kind;
   prop: string;
   expect: string | Primitive[];
   actual: unknown;

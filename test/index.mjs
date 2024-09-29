@@ -1,51 +1,25 @@
 import { argv, stdout, stderr } from "node:process";
-import { spawn } from "./spawn.mjs";
+import { crawl, spawn } from "./util.mjs";
+import { crawlTarget, toTarget } from "./target.mjs";
 
 Error.stackTraceLimit = Infinity;
 
-export const CASE_ENUM = [
-  "call",
-  "chain",
-  "class",
-  "declaration",
-  "expression",
-  "function",
-  "identifier",
-  "key",
-  "literal",
-  "member",
-  "module",
-  "object",
-  "pattern",
-  "program",
-  "statement",
-  "template",
-];
+/**
+ * @type {(
+ *   target: import("./target").Target,
+ * ) => Promise<number>}
+ */
+const cov = ({ main, test }) =>
+  spawn("npx", ["c8", "--100", "--include", main, "--", "node", test ?? main]);
 
 /**
  * @type {(
- *   name: string,
+ *   target: import("./target").Target,
  * ) => Promise<number>}
  */
-const cov = (name) =>
-  spawn("npx", [
-    "c8",
-    "--100",
-    "--include",
-    `lib/guard/${name}.mjs`,
-    "--",
-    "node",
-    `test/cases/${name}.mjs`,
-  ]);
-
-/**
- * @type {(
- *   name: string,
- * ) => Promise<number>}
- */
-const reg = async (name) => {
+const reg = async ({ main, test }) => {
   try {
-    await import(`./cases/${name}.mjs`);
+    await import(`../${test ?? main}`);
     return 0;
   } catch (error) {
     if (error instanceof Error) {
@@ -66,25 +40,38 @@ const run = { cov, reg };
  */
 const main = async (argv) => {
   if (argv.length === 0) {
-    stderr.write("usage: node test/index.mjs (cov|reg) [ ... cases ]\n");
+    stderr.write("usage: node test/index.mjs (cov|reg) [ ... files ]\n");
     return 1;
   } else {
-    const [mode, ...case_enum] = argv;
+    const [mode, ...mains] = argv;
     if (mode === "cov" || mode === "reg") {
-      for (const name of case_enum.length === 0 ? CASE_ENUM : case_enum) {
-        if (CASE_ENUM.includes(name)) {
-          const code = await run[mode](name);
+      const root = new URL("../", import.meta.url);
+      if (mains.length === 0) {
+        for (const target of await crawlTarget(new URL("lib/", root), root)) {
+          stdout.write(`testing ${target.main}...\n`);
+          const code = await run[mode](target);
           if (code !== 0) {
             return code;
           }
-        } else {
-          stderr.write(`unknown case: ${name}\n`);
-          return 1;
+        }
+      } else {
+        for (const main of mains) {
+          const either = await toTarget(new URL(main, root), root);
+          if (typeof either === "string") {
+            stderr.write(`${either}\n`);
+            return 1;
+          } else {
+            stdout.write(`testing ${either.main}...\n`);
+            const code = await run[mode](either);
+            if (code !== 0) {
+              return code;
+            }
+          }
         }
       }
       return 0;
     } else {
-      stderr.write("usage: node test/index.mjs (cov|reg) [ ... cases ]\n");
+      stderr.write("usage: node test/index.mjs (cov|reg) [ ... files ]\n");
       return 1;
     }
   }
