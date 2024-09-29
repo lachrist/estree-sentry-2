@@ -1,7 +1,7 @@
 import { generate } from "astring";
 import { parse } from "acorn";
 import {
-  PreciseEstreeSyntaxError,
+  EstreeSentrySyntaxError,
   guard,
   listChildren,
   ROOT_PATH,
@@ -72,7 +72,7 @@ export const fail = (code, type = "script") => {
   try {
     guard(root1, ROOT_PATH, compileAnnotate());
   } catch (error) {
-    if (!(error instanceof PreciseEstreeSyntaxError)) {
+    if (!(error instanceof EstreeSentrySyntaxError)) {
       throw error;
     }
     return undefined;

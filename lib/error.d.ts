@@ -2,7 +2,7 @@ import type { Kind } from "./kind";
 import type { Path } from "./path";
 import type { Primitive } from "./util/primitive";
 
-export class PreciseEstreeTypeError extends TypeError {
+export class EstreeSentryTypeError extends TypeError {
   constructor(cause: never);
   message: string;
   cause: never;
@@ -17,7 +17,7 @@ export type SyntaxErrorCause = {
   actual: unknown;
 };
 
-export class PreciseEstreeSyntaxError extends SyntaxError {
+export class EstreeSentrySyntaxError extends SyntaxError {
   constructor(message: string, cause: SyntaxErrorCause);
   message: string;
   cause: never;

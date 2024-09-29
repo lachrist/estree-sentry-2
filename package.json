@@ -1,6 +1,6 @@
 {
-  "name": "precise-estree",
-  "version": "0.0.0",
+  "name": "estree-sentry",
+  "version": "0.1.0",
   "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "devDependencies": {
