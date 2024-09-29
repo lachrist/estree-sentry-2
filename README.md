@@ -6,11 +6,11 @@ More precise [estree](https://github.com/estree/estree) type with annotations.
 
 [estree](https://github.com/estree/estree) and its typescript type definition
 [@types/estree](https://www.npmjs.com/package/@types/estree) are great but many
-valid `estree.Program` are nonsensical. Hence, consumers of `estree` nodes do
-not benefit from the typescript type system as much as they could. For instance,
-non-computed key of `MemberExpression` should only be `Identifier` or
-`PrivateIdentifier`, but it can actually be any `Expression`. So, we have to add
-the ugly type assertion `as Identifier` below:
+valid `estree.Program` are nonsensical and consumers do not benefit from the
+typescript type system as much as they could. For instance, the key of a
+non-computed member expression should only be an identifier or a private
+identifier, but it can be an arbitrary expression. This forces consumers to add
+ugly type assertions such as the `as Identifier` below:
 
 ```typescript
 import { Identifier, MemberExpression } from "estree";
@@ -20,10 +20,10 @@ const getPublicKey = (node: MemberExpression): string | null =>
     : (node.property as Identifier).name;
 ```
 
-`estree-sentry` is a subset of `estree` which removes many nonsensical nodes at
-the price of more complex type definitions. The makes nodes easier to consume by
-harder to generate. For instance, in the snippet below, the type assertion would
-not be needed. `estree-sentry` offers two other features to further leverage the
+`estree-sentry` is a subset of `estree` (safe call expression in left-hand side
+of assignments) which removes many nonsensical nodes at the price of more
+complex type definitions. This makes nodes easier to consume but harder to
+produce. `estree-sentry` offers two other features to further leverage the
 typescript type system:
 
 - Nodes are recursively parametrized by annotations. This makes it possible to
@@ -43,32 +43,37 @@ typescript type system:
   }
   ```
 - Branded types for: variable, label, source, specifier, public key, and private
-  key. Definitions [here]("./lib/brand.d.ts"). By turning these data from a
-  generic `string` to their own brand, we make types more explicit and prevent
-  some mix-ups.
+  key. Definitions [here]("lib/brand.d.ts"). Turning these data from generic
+  string to their own brand, makes types more explicit and prevent some mix-ups.
 
 ## Nonsensical nodes removed by `estree-sentry`
 
-- Module declarations cannot appear outside module.
-- Optional expressions cannot appear outside chain expression.
-- Rest element can only appear in: array pattern, object pattern, or function
-  parameter.
-- The argument of update expression can only be: an identifier, a member
-  expression. It cannot be an arbitrary pattern.
-- The left-hand side of assignment can be an arbitrary pattern (or a call
-  expression) only if the operator is `=`. Else, it can only be: an identifier,
-  a member expression, or a call expression. Yes call expressions in left-hand
+- Module declarations cannot appear in script programs.
+- Optional expressions cannot appear outside chain expressions.
+- Rest elements is not an abritrary pattern, it can only appear in: array
+  patterns, object patterns, or function parameters.
+- The argument of update expression is not arbitrary patterns, it can only be:
+  an identifier, a member expression.
+- The left-hand side of assignment can only be an arbitrary pattern (or a call
+  expression) if the operator is `=`. Else, it can only be: an identifier, a
+  member expression, or a call expression. Yes call expressions in left-hand
   side are weird...
 - Non-computed keys are indeed non-computed in: object property, member
   expression, class property definition, and class method definition.
-- Methods, getters and setters are always function expressions in object
+- Methods, getters, and setters are always a function expression in object
   properties.
-- Getters and setters: cannot be generator nor async, cannot have an id, and
-  have the correct arity.
-- Constructors: cannot be generator nor async, and cannot have an id.
+- Getters and setters:
+  - cannot be generator
+  - cannot be async
+  - cannot have an id
+  - have the correct arity (0 for getters and 1 for setters).
+- Class constructors:
+  - cannot be generator
+  - cannot be async
+  - cannot have an id
 - The key of constructor definitions is always `constructor`.
-- In binary expressions, private identifier can appear on the left-hand side
-  only if the operator is `in`.
+- In binary expressions, the left operand can be a private identifier only if
+  the operator is `in`.
 - The literal of source and specifier in module declarations is always a string.
-- Expression arrow expressions have an expression as body and block arrow
-  expressions have a block as body.
+- Expression arrows have an expression as body and block arrows have a block as
+  body.
