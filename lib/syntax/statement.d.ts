@@ -1,3 +1,4 @@
+import { Brand } from "../util/brand";
 import type { ClassDeclaration } from "./class";
 import { VariableDeclaration } from "./declaration";
 import type { DeclarableExpression, Expression } from "./expression";
@@ -49,10 +50,12 @@ export type BlockStatement<X> = X & {
   body: Statement<X>[];
 };
 
+export type Directive = Brand<string, "estree.Directive">;
+
 export type ExpressionStatement<X> = X & {
   type: "ExpressionStatement";
   expression: Expression<X>;
-  directive: string | null;
+  directive: Directive | null;
 };
 
 export type IfStatement<X> = X & {

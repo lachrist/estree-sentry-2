@@ -1,5 +1,4 @@
 export * from "./annotate";
-export * from "./brand";
 export * from "./error";
 export * from "./keyword";
 export * from "./kind";

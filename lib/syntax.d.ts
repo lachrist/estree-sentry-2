@@ -56,7 +56,6 @@ import {
 import {
   SourceLiteral,
   SpecifierLiteral,
-  PublicObjectKeyStringLiteral,
   StringLiteral,
   NumberLiteral,
   NullLiteral,
@@ -195,7 +194,6 @@ export type Node<X> =
   | ConstructorIdentifier<X>
   | SourceLiteral<X>
   | SpecifierLiteral<X>
-  | PublicObjectKeyStringLiteral<X>
   | StringLiteral<X>
   | NumberLiteral<X>
   | NullLiteral<X>

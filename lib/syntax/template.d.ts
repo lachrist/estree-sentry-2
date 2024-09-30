@@ -1,4 +1,12 @@
+import { Brand } from "../util/brand";
 import { Expression } from "./expression";
+
+export type TemplateElementValue = Brand<string, "estree.TemplateElementValue">;
+
+export type TemplateElementRawValue = Brand<
+  string,
+  "estree.TemplateElementRawValue"
+>;
 
 export type TaggedTemplateExpression<X> = X & {
   type: "TaggedTemplateExpression";
@@ -16,8 +24,7 @@ export type TemplateElement<X> = X & {
   type: "TemplateElement";
   tail: boolean;
   value: {
-    /* It is null when the template literal is tagged and the text has an invalid escape (e.g. - tag`\unicode and \u{55}`) */
-    cooked: string | null;
-    raw: string;
+    cooked: TemplateElementValue | null;
+    raw: TemplateElementRawValue;
   };
 };
