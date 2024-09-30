@@ -20,10 +20,9 @@ export const getNonComputedKey = (node: MemberExpression): string | null =>
   node.computed ? null : (node.property as Identifier | PrivateIdentifier).name;
 ```
 
-`estree-sentry` is a subset of `estree` (safe call expression in left-hand side
-of assignments) which removes many nonsensical nodes at the price of more
-complex type definitions. This makes nodes easier to consume (but harder to
-produce).
+`estree-sentry` is almost a subset of `estree` which removes many nonsensical
+nodes at the price of more complex type definitions. This makes nodes easier to
+consume (but harder to produce).
 
 ```typescript
 import { MemberExpression } from "estree-sentry";
@@ -54,13 +53,12 @@ type system:
   key. Definitions [here](lib/brand.d.ts). Turning these data from generic
   string to their own brand, makes types more explicit and prevent some mix-ups.
 
-## Nonsensical nodes removed by `estree-sentry`
+## Removed nonsensical nodes
 
 - Module declarations cannot appear in script programs.
 - Optional expressions cannot appear outside chain expressions.
 - Rest elements cannot appear outside object patterns, array patterns, or
   function parameters.
-
 - In module declarations, the source literal and the specifier literals are
   always strings.
 - In expression arrows, the body is an expression. And in block arrows, the body
@@ -75,20 +73,19 @@ type system:
   literal.
 - In non-computed class definitions, the key can only be an identifier, a
   private identifier, or a literal.
-- In method object properties, the value can only be a function expression.
-- Getters and setters:
-  - always function expression
-  - cannot be generator
-  - cannot be async
-  - cannot have an id
-  - have the correct arity (0 for getters and 1 for setters).
-- Class constructors:
-  - cannot be generator
-  - cannot be async
-  - cannot have an id
-- The key of constructor definitions is always `constructor`.
+- In class constructor definitions, the key is always `constructor` and the
+  function value does not have an id, cannot be a generator, and cannot be
+  asynchronous.
+- In object method properties and class method definition, the value can only be
+  a function expression without id.
+- In object accessor properties and class accessor definitions, the value:
+  - con only be function expression (only relevant for object properties)
+  - has the correct arity (0 for getters and 1 for setters).
+  - does not have in id
+  - cannot be a generator
+  - cannot be asynchronous
 
-## Nodes
+## Additional nodes
 
 - In binary expressions with `in` operator, the left operand can be a private
   identifier.
