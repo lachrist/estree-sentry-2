@@ -1,5 +1,5 @@
 import type { PrivateKeyIdentifier, PublicKeyIdentifier } from "./identifier";
-import type { BigIntLiteral, PublicKeyLiteral, SimpleLiteral } from "./literal";
+import type { BigIntLiteral, SimpleLiteral } from "./literal";
 
 export type PublicKey<X> =
   | PublicKeyIdentifier<X>

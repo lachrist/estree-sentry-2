@@ -2,6 +2,8 @@ import { access } from "node:fs/promises";
 import { crawl } from "./util.mjs";
 import { R_OK } from "node:constants";
 
+const { URL, Set, Error } = globalThis;
+
 /**
  * @type {(
  *   base: URL,

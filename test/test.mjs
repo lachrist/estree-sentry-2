@@ -3,13 +3,15 @@ import { parse } from "acorn";
 import {
   EstreeSentrySyntaxError,
   guardWithAnnotation,
-  listChildren,
   ROOT_PATH,
   splitPath,
   walkPath,
 } from "../lib/index.mjs";
 import { TestError } from "./error.mjs";
 import { compileAnnotate } from "./annotate.mjs";
+import { listChildren } from "./children.mjs";
+
+const { undefined } = globalThis;
 
 /**
  * @type {(

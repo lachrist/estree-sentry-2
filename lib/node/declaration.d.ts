@@ -1,6 +1,6 @@
-import { AnonymousClassDeclaration, ClassDeclaration } from "./class";
+import { ClassDeclaration } from "./class";
 import { Expression } from "./expression";
-import { AnonymousFunctionDeclaration, FunctionDeclaration } from "./function";
+import { FunctionDeclaration } from "./function";
 import { Pattern } from "./pattern";
 
 export type VariableKind = "var" | "let" | "const";

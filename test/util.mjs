@@ -1,7 +1,7 @@
 import { spawn as spawnInner } from "child_process";
 import { readdir, stat } from "node:fs/promises";
 
-const { URL } = globalThis;
+const { Error, Promise, URL } = globalThis;
 
 /**
  * @type {(

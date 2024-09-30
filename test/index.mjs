@@ -1,6 +1,8 @@
 import { argv, stdout, stderr } from "node:process";
-import { crawl, spawn } from "./util.mjs";
+import { spawn } from "./util.mjs";
 import { crawlTarget, toTarget } from "./target.mjs";
+
+const { Error, Infinity, URL, process } = globalThis;
 
 Error.stackTraceLimit = Infinity;
 

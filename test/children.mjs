@@ -1,8 +1,11 @@
-import { listChildren as listChildrenTestee } from "../lib/index.mjs";
-import { SEGMENT_RECORD } from "../lib/index.mjs";
+import {
+  listChildren as listChildrenTestee,
+  SEGMENT_RECORD,
+} from "../lib/index.mjs";
 import { TestError } from "./error.mjs";
 
 const {
+  Set,
   Array: { isArray },
   Object: { hasOwn, values: listValueArray },
   Reflect: { ownKeys },
@@ -52,7 +55,7 @@ const listChildrenOracle = (node) => {
  *   node: import("../lib").Node<X>
  * )=> import("../lib").Node<X>[]}
  */
-const listChildren = (node) => {
+export const listChildren = (node) => {
   const children = listChildrenTestee(node);
   const set = new Set(children);
   for (const child of listValueArray(node)) {

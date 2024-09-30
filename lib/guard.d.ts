@@ -12,7 +12,7 @@ export type Guard<N> = (
   annotate: GuardAnnotate,
 ) => N & AnnotationBrand;
 
-export type Subguard<N extends { type: string }> = <X>(
+export type Subguard<N extends { type: string }> = (
   node: object,
   path: Path,
   annotate: GuardAnnotate,

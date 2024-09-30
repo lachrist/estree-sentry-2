@@ -20,9 +20,9 @@ import type {
 } from "./pattern";
 import type { ExpressionLiteral } from "./literal";
 import type { ObjectExpression } from "./object";
-import { MemberExpression, OptionalMemberExpression } from "./member";
+import { MemberExpression } from "./member";
 import { TaggedTemplateExpression, TemplateLiteral } from "./template";
-import { CallExpression, OptionalCallExpression } from "./call";
+import { CallExpression } from "./call";
 import { ChainExpression } from "./chain";
 import { VariableDeclaration } from "./declaration";
 
