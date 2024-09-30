@@ -21,6 +21,15 @@ export type ConstructorFunctionExpression<X> = X & {
   body: BlockStatement<X>;
 };
 
+export type MethodFunctionExpression<X> = X & {
+  type: "FunctionExpression";
+  id: null;
+  async: boolean;
+  generator: boolean;
+  params: RestablePattern<X>[];
+  body: BlockStatement<X>;
+};
+
 export type GetterFunctionExpression<X> = X & {
   type: "FunctionExpression";
   id: null;

@@ -17,7 +17,7 @@ import {
 import { ClassEntry, ClassBody } from "./syntax/class";
 import {
   ConstructorFunctionExpression,
-  FunctionExpression,
+  MethodFunctionExpression,
   GetterFunctionExpression,
   SetterFunctionExpression,
 } from "./syntax/function";
@@ -50,7 +50,7 @@ import {
 } from "./syntax/identifier";
 
 export type KindRecord<X> = {
-  FunctionExpression: FunctionExpression<X>;
+  MethodFunctionExpression: MethodFunctionExpression<X>;
   ConstructorFunctionExpression: ConstructorFunctionExpression<X>;
   GetterFunctionExpression: GetterFunctionExpression<X>;
   SetterFunctionExpression: SetterFunctionExpression<X>;

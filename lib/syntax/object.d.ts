@@ -1,7 +1,7 @@
 import type { Expression, SpreadElement } from "./expression";
 import type {
-  FunctionExpression,
   GetterFunctionExpression,
+  MethodFunctionExpression,
   SetterFunctionExpression,
 } from "./function";
 import type { PublicKey } from "./key";
@@ -54,7 +54,7 @@ export type MethodObjectProperty<X> =
 export type NonComputedMethodObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
-  value: FunctionExpression<X>;
+  value: MethodFunctionExpression<X>;
   kind: "init";
   method: true;
   shorthand: false;
@@ -64,7 +64,7 @@ export type NonComputedMethodObjectProperty<X> = X & {
 export type ComputedMethodObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
-  value: FunctionExpression<X>;
+  value: MethodFunctionExpression<X>;
   kind: "init";
   method: true;
   shorthand: false;

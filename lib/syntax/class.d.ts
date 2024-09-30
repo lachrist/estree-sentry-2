@@ -1,8 +1,8 @@
 import type { Expression } from "./expression";
 import type {
   ConstructorFunctionExpression,
-  FunctionExpression,
   GetterFunctionExpression,
+  MethodFunctionExpression,
   SetterFunctionExpression,
 } from "./function";
 import type { ConstructorIdentifier, VariableIdentifier } from "./identifier";
@@ -68,7 +68,7 @@ export type PlainMethodDefinition<X> =
 export type ComputedPlainMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Expression<X>;
-  value: FunctionExpression<X>;
+  value: MethodFunctionExpression<X>;
   kind: "method";
   computed: true;
   static: boolean;
@@ -77,7 +77,7 @@ export type ComputedPlainMethodDefinition<X> = X & {
 export type NonComputedPlainMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Key<X>;
-  value: FunctionExpression<X>;
+  value: MethodFunctionExpression<X>;
   kind: "method";
   computed: false;
   static: boolean;
