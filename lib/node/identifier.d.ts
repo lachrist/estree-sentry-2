@@ -1,5 +1,5 @@
 import type { Keyword } from "../keyword";
-import { Brand } from "../util/brand";
+import type { Brand } from "../util/brand";
 
 // VariableIdentifier //
 

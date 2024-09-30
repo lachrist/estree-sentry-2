@@ -1,5 +1,5 @@
-import { Brand } from "../util/brand";
-import { Expression } from "./expression";
+import type { Brand } from "../util/brand";
+import type { Expression } from "./expression";
 
 export type TemplateElementValue = Brand<string, "estree.TemplateElementValue">;
 

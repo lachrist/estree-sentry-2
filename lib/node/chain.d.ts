@@ -1,6 +1,6 @@
-import { OptionalCallExpression } from "./call";
-import { Expression } from "./expression";
-import { OptionalMemberExpression } from "./member";
+import type { OptionalCallExpression } from "./call";
+import type { Expression } from "./expression";
+import type { OptionalMemberExpression } from "./member";
 
 export type ChainableExpression<X> =
   | OptionalCallExpression<X>

@@ -1,7 +1,7 @@
-import { ClassDeclaration } from "./class";
-import { Expression } from "./expression";
-import { FunctionDeclaration } from "./function";
-import { Pattern } from "./pattern";
+import type { ClassDeclaration } from "./class";
+import type { Expression } from "./expression";
+import type { FunctionDeclaration } from "./function";
+import type { Pattern } from "./pattern";
 
 export type VariableKind = "var" | "let" | "const";
 

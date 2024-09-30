@@ -1,6 +1,6 @@
-import { Brand } from "../util/brand";
+import type { Brand } from "../util/brand";
 import type { ClassDeclaration } from "./class";
-import { VariableDeclaration } from "./declaration";
+import type { VariableDeclaration } from "./declaration";
 import type { DeclarableExpression, Expression } from "./expression";
 import type { FunctionDeclaration } from "./function";
 import type { LabelIdentifier } from "./identifier";

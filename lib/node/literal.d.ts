@@ -1,4 +1,4 @@
-import { Brand } from "../util/brand";
+import type { Brand } from "../util/brand";
 
 export type ExpressionLiteral<X> =
   | SimpleLiteral<X>

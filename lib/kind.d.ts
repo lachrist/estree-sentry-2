@@ -7,14 +7,14 @@
  * @module
  */
 
-import {
+import type {
   CatchClause,
   BlockStatement,
   Statement,
   SwitchCase,
 } from "./node/statement";
-import { ChainableExpression } from "./node/chain";
-import {
+import type { ChainableExpression } from "./node/chain";
+import type {
   CallablePattern,
   CallableUpdatePattern,
   DeclarablePattern,
@@ -23,34 +23,34 @@ import {
   RestablePatternProperty,
   UpdatePattern,
 } from "./node/pattern";
-import { ClassEntry, ClassBody } from "./node/class";
-import {
+import type { ClassEntry, ClassBody } from "./node/class";
+import type {
   ConstructorFunctionExpression,
   MethodFunctionExpression,
   GetterFunctionExpression,
   SetterFunctionExpression,
 } from "./node/function";
-import { Declaration, VariableDeclarator } from "./node/declaration";
-import {
+import type { Declaration, VariableDeclarator } from "./node/declaration";
+import type {
   DefaultDeclaration,
   ExportSpecifier,
   ImportSpecifier,
   ModuleStatement,
   Specifier,
 } from "./node/module";
-import {
+import type {
   DeclarableExpression,
   Expression,
   PrivatableExpression,
   SpreadableExpression,
   SuperableExpression,
 } from "./node/expression";
-import { Program } from "./node/program";
-import { Key, KeyIdentifier, PublicKey } from "./node/key";
-import { SourceLiteral } from "./node/literal";
-import { SpreadableObjectProperty } from "./node/object";
-import { TemplateElement, TemplateLiteral } from "./node/template";
-import {
+import type { Program } from "./node/program";
+import type { Key, KeyIdentifier, PublicKey } from "./node/key";
+import type { SourceLiteral } from "./node/literal";
+import type { SpreadableObjectProperty } from "./node/object";
+import type { TemplateElement, TemplateLiteral } from "./node/template";
+import type {
   ConstructorIdentifier,
   KeywordIdentifier,
   LabelIdentifier,

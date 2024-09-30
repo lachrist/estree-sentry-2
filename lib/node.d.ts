@@ -1,6 +1,6 @@
-import { CallExpression, OptionalCallExpression } from "./node/call";
-import { ChainExpression } from "./node/chain";
-import {
+import type { CallExpression, OptionalCallExpression } from "./node/call";
+import type { ChainExpression } from "./node/chain";
+import type {
   ClassExpression,
   ClassDeclaration,
   ClassBody,
@@ -16,8 +16,11 @@ import {
   StaticBlock,
   AnonymousClassDeclaration,
 } from "./node/class";
-import { VariableDeclaration, VariableDeclarator } from "./node/declaration";
-import {
+import type {
+  VariableDeclaration,
+  VariableDeclarator,
+} from "./node/declaration";
+import type {
   ThisExpression,
   ArrayExpression,
   SequenceExpression,
@@ -37,14 +40,14 @@ import {
   ImportExpression,
   AwaitExpression,
 } from "./node/expression";
-import {
+import type {
   FunctionExpression,
   ExpressionArrowFunctionExpression,
   BlockArrowFunctionExpression,
   FunctionDeclaration,
   AnonymousFunctionDeclaration,
 } from "./node/function";
-import {
+import type {
   PublicKeyIdentifier,
   PrivateKeyIdentifier,
   VariableIdentifier,
@@ -53,7 +56,7 @@ import {
   KeywordIdentifier,
   ConstructorIdentifier,
 } from "./node/identifier";
-import {
+import type {
   SourceLiteral,
   SpecifierLiteral,
   StringLiteral,
@@ -63,13 +66,13 @@ import {
   BigIntLiteral,
   RegExpLiteral,
 } from "./node/literal";
-import {
+import type {
   ComputedMemberExpression,
   NonComputedMemberExpression,
   OptionalComputedMemberExpression,
   OptionalNonComputedMemberExpression,
 } from "./node/member";
-import {
+import type {
   ImportDeclaration,
   RegularImportSpecifier,
   ImportDefaultSpecifier,
@@ -82,7 +85,7 @@ import {
   ExportDefaultDeclaration,
   ExportAllDeclaration,
 } from "./node/module";
-import {
+import type {
   ObjectExpression,
   NonComputedPlainObjectProperty,
   ComputedPlainObjectProperty,
@@ -93,7 +96,7 @@ import {
   ComputedSetterObjectProperty,
   NonComputedSetterObjectProperty,
 } from "./node/object";
-import {
+import type {
   NonComputedPatternProperty,
   ComputedPatternProperty,
   RestElement,
@@ -101,8 +104,8 @@ import {
   ArrayPattern,
   AssignmentPattern,
 } from "./node/pattern";
-import { ModuleProgram, ScriptProgram } from "./node/program";
-import {
+import type { ModuleProgram, ScriptProgram } from "./node/program";
+import type {
   SwitchCase,
   CatchClause,
   EmptyStatement,
@@ -124,7 +127,7 @@ import {
   ForOfStatement,
   DebuggerStatement,
 } from "./node/statement";
-import {
+import type {
   TaggedTemplateExpression,
   TemplateLiteral,
   TemplateElement,

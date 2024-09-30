@@ -1,5 +1,5 @@
-import { ChainableExpression } from "./chain";
-import { SpreadableExpression, SuperableExpression } from "./expression";
+import type { ChainableExpression } from "./chain";
+import type { SpreadableExpression, SuperableExpression } from "./expression";
 
 export type CallExpression<X> = X & {
   type: "CallExpression";

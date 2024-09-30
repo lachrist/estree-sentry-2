@@ -1,6 +1,6 @@
-import { ChainableExpression } from "./chain";
-import { Expression, SuperableExpression } from "./expression";
-import { KeyIdentifier } from "./key";
+import type { ChainableExpression } from "./chain";
+import type { Expression, SuperableExpression } from "./expression";
+import type { KeyIdentifier } from "./key";
 
 export type MemberExpression<X> =
   | ComputedMemberExpression<X>

@@ -1,5 +1,5 @@
 import type { AnonymousClassDeclaration, ClassDeclaration } from "./class";
-import { Declaration } from "./declaration";
+import type { Declaration } from "./declaration";
 import type { Expression } from "./expression";
 import type {
   AnonymousFunctionDeclaration,

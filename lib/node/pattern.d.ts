@@ -1,9 +1,9 @@
-import { CallExpression } from "./call";
-import { VariableDeclaration } from "./declaration";
+import type { CallExpression } from "./call";
+import type { VariableDeclaration } from "./declaration";
 import type { Expression } from "./expression";
 import type { VariableIdentifier } from "./identifier";
 import type { Key } from "./key";
-import { MemberExpression } from "./member";
+import type { MemberExpression } from "./member";
 
 export type Pattern<X> =
   | VariableIdentifier<X>
