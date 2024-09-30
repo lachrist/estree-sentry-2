@@ -57,16 +57,16 @@ const listChildrenOracle = (node) => {
  */
 export const listChildren = (node) => {
   const children = listChildrenTestee(node);
-  const set = new Set(children);
-  for (const child of listValueArray(node)) {
-    if (set.has(child)) {
+  for (const value of listValueArray(node)) {
+    if (value === children) {
       throw new TestError("listChildren should return a new array", {
         node,
         children,
-        child,
+        value,
       });
     }
   }
+  const set = new Set(children);
   for (const child of listChildrenOracle(node)) {
     if (!set.has(child)) {
       throw new TestError("missing child", { node, children, child });
