@@ -8,6 +8,14 @@
     "lib/**/*.mjs",
     "!lib/**/*.test.mjs"
   ],
+  "keywords": [
+    "estree",
+    "sentry",
+    "guard",
+    "escmascript",
+    "typescript",
+    "annotation"
+  ],
   "devDependencies": {
     "@types/estree": "^1.0.6",
     "@types/node": "^22.7.4",
