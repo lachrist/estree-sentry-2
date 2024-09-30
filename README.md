@@ -1,4 +1,4 @@
-# estree-sentry
+# ESTreeSentry
 
 A more precise [ESTree](https://github.com/estree/estree) type with support for
 generic annotations.
@@ -7,21 +7,13 @@ generic annotations.
 
 [ESTree](https://github.com/estree/estree) and its typescript type definition
 [@types/estree](https://www.npmjs.com/package/@types/estree) are great but many
-valid `estree.Program` are nonsensical and consumers do not benefit from the
-typescript type system as much as they could. That is due to its contextless
-philosophy. For instance, the key of a non-computed member expression can be an
-arbitrary expression but only an identifier or a private identifier would be
-sensible. This forces consumers to backdoor the type system with ugly type
-assertions such as the `as Identifier | PrivateIdentifier` below:
-
-[ESTree](https://github.com/estree/estree) and its TypeScript type definition
-[@types/estree](https://www.npmjs.com/package/@types/estree) are great, but many
-valid `estree.Program` nodes are nonsensical, which limits the benefits
-TypeScript's type system provides to consumers. For instance, the key of a
-non-computed member expression can be an arbitrary expression, but only an
-identifier or a private identifier would be sensible. This forces consumers to
-bypass the type system with type assertions, such as the as
-`Identifier | PrivateIdentifier` in the example below:
+valid `estree.Program` are nonsensical, which limits the benefits TypeScript's
+type system provides. The presence of nonsensical nodes in ESTree is intentional
+and due to its contextless philosophy. For instance, the key of a non-computed
+member expression can be an arbitrary expression but only an identifier or a
+private identifier would be sensible. This forces consumers to bypass the type
+system with ugly type assertions such as the `as Identifier | PrivateIdentifier`
+below:
 
 ```typescript
 import { MemberExpression, Identifier, PrivateIdentifier } from "estree";
@@ -39,8 +31,8 @@ export const getNonComputedKey = (node: MemberExpression<{}>): string | null =>
   node.computed ? null : node.property.name;
 ```
 
-ESTreeSentry offers two additional features to further leverage the TypeScript
-type system:
+Additionally, ESTreeSentry offers two features that leverage the TypeScript type
+system further:
 
 - Nodes are recursively parameterized by annotations. This makes it possible to
   enforce type constraints on annotations such as code location. For instance,
@@ -59,8 +51,9 @@ type system:
   }
   ```
 - Arbitrary strings and numbers are branded to make types more explicit and
-  prevent mix-ups. For instance, the name of identifier could be `VariableName`
-  or `LabelName` depending on the context.
+  prevent mix-ups. For instance, `VariableName` brands the name of identifiers
+  when used in an expression context and `LabelName` brands the name of
+  identifiers when used in a label context.
 
 ## Removed nonsensical nodes
 
@@ -106,9 +99,10 @@ type system:
 
 [typedoc](https://lachrist.github.io/estree-sentry-2/typedoc/index.html)
 
-The main function is `guardWithAnnotation` which takes a node, an initial path
-and an annotation function. It returns a deep copy of the node with annotations
-if it is a valid EstreeSentry program. It throws a syntax error otherwise.
+The main function exported by `estree-sentry` is `guardWithAnnotation` which
+takes a node, an initial path and an annotation function. It returns a deep copy
+of the node with annotations if it is a valid ESTreeSentry program. It throws a
+syntax error otherwise.
 
 ```javascript
 import { ROOT_PATH, guard } from "estree-sentry";
