@@ -14,28 +14,28 @@ export type ClassEntry<X> =
   | PropertyDefinition<X>
   | StaticBlock<X>;
 
-export type ClassExpression<X> = (X extends null ? {} : X) & {
+export type ClassExpression<X> = X & {
   type: "ClassExpression";
   id: VariableIdentifier<X> | null;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type AnonymousClassDeclaration<X> = (X extends null ? {} : X) & {
+export type AnonymousClassDeclaration<X> = X & {
   type: "ClassDeclaration";
   id: null;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type ClassDeclaration<X> = (X extends null ? {} : X) & {
+export type ClassDeclaration<X> = X & {
   type: "ClassDeclaration";
   id: VariableIdentifier<X>;
   superClass: Expression<X> | null;
   body: ClassBody<X>;
 };
 
-export type ClassBody<X> = (X extends null ? {} : X) & {
+export type ClassBody<X> = X & {
   type: "ClassBody";
   body: Array<ClassEntry<X>>;
 };
@@ -50,7 +50,7 @@ export type MethodDefinition<X> =
 
 // ConstructorMethod //
 
-export type ConstructorMethodDefinition<X> = (X extends null ? {} : X) & {
+export type ConstructorMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: ConstructorIdentifier<X>;
   value: ConstructorFunctionExpression<X>;
@@ -65,7 +65,7 @@ export type PlainMethodDefinition<X> =
   | ComputedPlainMethodDefinition<X>
   | NonComputedPlainMethodDefinition<X>;
 
-export type ComputedPlainMethodDefinition<X> = (X extends null ? {} : X) & {
+export type ComputedPlainMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Expression<X>;
   value: FunctionExpression<X>;
@@ -74,7 +74,7 @@ export type ComputedPlainMethodDefinition<X> = (X extends null ? {} : X) & {
   static: boolean;
 };
 
-export type NonComputedPlainMethodDefinition<X> = (X extends null ? {} : X) & {
+export type NonComputedPlainMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Key<X>;
   value: FunctionExpression<X>;
@@ -89,7 +89,7 @@ export type GetterMethodDefinition<X> =
   | ComputedGetterMethodDefinition<X>
   | NonComputedGetterMethodDefinition<X>;
 
-export type ComputedGetterMethodDefinition<X> = (X extends null ? {} : X) & {
+export type ComputedGetterMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Expression<X>;
   value: GetterFunctionExpression<X>;
@@ -98,7 +98,7 @@ export type ComputedGetterMethodDefinition<X> = (X extends null ? {} : X) & {
   static: boolean;
 };
 
-export type NonComputedGetterMethodDefinition<X> = (X extends null ? {} : X) & {
+export type NonComputedGetterMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Key<X>;
   value: GetterFunctionExpression<X>;
@@ -113,7 +113,7 @@ export type SetterMethodDefinition<X> =
   | ComputedSetterMethodDefinition<X>
   | NonComputedSetterMethodDefinition<X>;
 
-export type ComputedSetterMethodDefinition<X> = (X extends null ? {} : X) & {
+export type ComputedSetterMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Expression<X>;
   value: SetterFunctionExpression<X>;
@@ -122,7 +122,7 @@ export type ComputedSetterMethodDefinition<X> = (X extends null ? {} : X) & {
   static: boolean;
 };
 
-export type NonComputedSetterMethodDefinition<X> = (X extends null ? {} : X) & {
+export type NonComputedSetterMethodDefinition<X> = X & {
   type: "MethodDefinition";
   key: Key<X>;
   value: SetterFunctionExpression<X>;
@@ -137,7 +137,7 @@ export type PropertyDefinition<X> =
   | ComputedPropertyDefinition<X>
   | NonComputedPropertyDefinition<X>;
 
-export type ComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
+export type ComputedPropertyDefinition<X> = X & {
   type: "PropertyDefinition";
   key: Expression<X>;
   value: Expression<X> | null;
@@ -145,7 +145,7 @@ export type ComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
   static: boolean;
 };
 
-export type NonComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
+export type NonComputedPropertyDefinition<X> = X & {
   type: "PropertyDefinition";
   key: Key<X>;
   value: Expression<X> | null;
@@ -155,7 +155,7 @@ export type NonComputedPropertyDefinition<X> = (X extends null ? {} : X) & {
 
 // StaticBlock //
 
-export type StaticBlock<X> = (X extends null ? {} : X) & {
+export type StaticBlock<X> = X & {
   type: "StaticBlock";
   body: Statement<X>[];
 };

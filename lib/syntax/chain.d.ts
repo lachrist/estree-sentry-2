@@ -7,7 +7,7 @@ export type ChainableExpression<X> =
   | OptionalMemberExpression<X>
   | Expression<X>;
 
-export type ChainExpression<X> = (X extends null ? {} : X) & {
+export type ChainExpression<X> = X & {
   type: "ChainExpression";
   expression: ChainableExpression<X>;
 };

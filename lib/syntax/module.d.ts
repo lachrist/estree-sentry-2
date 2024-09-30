@@ -36,67 +36,67 @@ export type DefaultDeclaration<X> =
   | ClassDeclaration<X>
   | Expression<X>;
 
-export type ImportDeclaration<X> = (X extends null ? {} : X) & {
+export type ImportDeclaration<X> = X & {
   type: "ImportDeclaration";
   specifiers: Array<ImportSpecifier<X>>;
   source: SourceLiteral<X>;
 };
 
-export type RegularImportSpecifier<X> = (X extends null ? {} : X) & {
+export type RegularImportSpecifier<X> = X & {
   type: "ImportSpecifier";
   imported: Specifier<X>;
   local: VariableIdentifier<X>;
 };
 
-export type ImportDefaultSpecifier<X> = (X extends null ? {} : X) & {
+export type ImportDefaultSpecifier<X> = X & {
   type: "ImportDefaultSpecifier";
   local: VariableIdentifier<X>;
 };
 
-export type ImportNamespaceSpecifier<X> = (X extends null ? {} : X) & {
+export type ImportNamespaceSpecifier<X> = X & {
   type: "ImportNamespaceSpecifier";
   local: VariableIdentifier<X>;
 };
 
-export type AggregateExportNamedDeclaration<X> = (X extends null ? {} : X) & {
+export type AggregateExportNamedDeclaration<X> = X & {
   type: "ExportNamedDeclaration";
   declaration: null;
   specifiers: AggregateExportSpecifier<X>[];
   source: SourceLiteral<X>;
 };
 
-export type IndirectExportNamedDeclaration<X> = (X extends null ? {} : X) & {
+export type IndirectExportNamedDeclaration<X> = X & {
   type: "ExportNamedDeclaration";
   declaration: null;
   specifiers: ExportSpecifier<X>[];
   source: null;
 };
 
-export type DirectExportNamedDeclaration<X> = (X extends null ? {} : X) & {
+export type DirectExportNamedDeclaration<X> = X & {
   type: "ExportNamedDeclaration";
   declaration: Declaration<X>;
   specifiers: [];
   source: null;
 };
 
-export type AggregateExportSpecifier<X> = (X extends null ? {} : X) & {
+export type AggregateExportSpecifier<X> = X & {
   type: "ExportSpecifier";
   exported: Specifier<X>;
   local: Specifier<X>;
 };
 
-export type ExportSpecifier<X> = (X extends null ? {} : X) & {
+export type ExportSpecifier<X> = X & {
   type: "ExportSpecifier";
   exported: Specifier<X>;
   local: VariableIdentifier<X>;
 };
 
-export type ExportDefaultDeclaration<X> = (X extends null ? {} : X) & {
+export type ExportDefaultDeclaration<X> = X & {
   type: "ExportDefaultDeclaration";
   declaration: DefaultDeclaration<X>;
 };
 
-export type ExportAllDeclaration<X> = (X extends null ? {} : X) & {
+export type ExportAllDeclaration<X> = X & {
   type: "ExportAllDeclaration";
   exported: Specifier<X> | null;
   source: SourceLiteral<X>;

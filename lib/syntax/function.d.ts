@@ -3,7 +3,7 @@ import type { VariableIdentifier } from "./identifier";
 import type { Pattern, RestablePattern } from "./pattern";
 import type { BlockStatement } from "./statement";
 
-export type FunctionExpression<X> = (X extends null ? {} : X) & {
+export type FunctionExpression<X> = X & {
   type: "FunctionExpression";
   id: VariableIdentifier<X> | null;
   async: boolean;
@@ -12,7 +12,7 @@ export type FunctionExpression<X> = (X extends null ? {} : X) & {
   body: BlockStatement<X>;
 };
 
-export type ConstructorFunctionExpression<X> = (X extends null ? {} : X) & {
+export type ConstructorFunctionExpression<X> = X & {
   type: "FunctionExpression";
   id: null;
   async: false;
@@ -21,7 +21,7 @@ export type ConstructorFunctionExpression<X> = (X extends null ? {} : X) & {
   body: BlockStatement<X>;
 };
 
-export type GetterFunctionExpression<X> = (X extends null ? {} : X) & {
+export type GetterFunctionExpression<X> = X & {
   type: "FunctionExpression";
   id: null;
   async: false;
@@ -30,7 +30,7 @@ export type GetterFunctionExpression<X> = (X extends null ? {} : X) & {
   body: BlockStatement<X>;
 };
 
-export type SetterFunctionExpression<X> = (X extends null ? {} : X) & {
+export type SetterFunctionExpression<X> = X & {
   type: "FunctionExpression";
   id: null;
   async: false;
@@ -43,7 +43,7 @@ export type ArrowFunctionExpression<X> =
   | ExpressionArrowFunctionExpression<X>
   | BlockArrowFunctionExpression<X>;
 
-export type ExpressionArrowFunctionExpression<X> = (X extends null ? {} : X) & {
+export type ExpressionArrowFunctionExpression<X> = X & {
   type: "ArrowFunctionExpression";
   id: null;
   async: boolean;
@@ -53,7 +53,7 @@ export type ExpressionArrowFunctionExpression<X> = (X extends null ? {} : X) & {
   body: Expression<X>;
 };
 
-export type BlockArrowFunctionExpression<X> = (X extends null ? {} : X) & {
+export type BlockArrowFunctionExpression<X> = X & {
   type: "ArrowFunctionExpression";
   id: null;
   async: boolean;
@@ -63,7 +63,7 @@ export type BlockArrowFunctionExpression<X> = (X extends null ? {} : X) & {
   body: BlockStatement<X>;
 };
 
-export type FunctionDeclaration<X> = (X extends null ? {} : X) & {
+export type FunctionDeclaration<X> = X & {
   type: "FunctionDeclaration";
   params: RestablePattern<X>[];
   id: VariableIdentifier<X>;
@@ -72,7 +72,7 @@ export type FunctionDeclaration<X> = (X extends null ? {} : X) & {
   body: BlockStatement<X>;
 };
 
-export type AnonymousFunctionDeclaration<X> = (X extends null ? {} : X) & {
+export type AnonymousFunctionDeclaration<X> = X & {
   type: "FunctionDeclaration";
   params: RestablePattern<X>[];
   id: null;

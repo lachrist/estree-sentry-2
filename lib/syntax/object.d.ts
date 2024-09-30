@@ -14,7 +14,7 @@ export type ObjectProperty<X> =
   | SetterObjectProperty<X>
   | GetterObjectProperty<X>;
 
-export type ObjectExpression<X> = (X extends null ? {} : X) & {
+export type ObjectExpression<X> = X & {
   type: "ObjectExpression";
   properties: Array<SpreadableObjectProperty<X>>;
 };
@@ -25,7 +25,7 @@ export type PlainObjectProperty<X> =
   | NonComputedPlainObjectProperty<X>
   | ComputedPlainObjectProperty<X>;
 
-export type NonComputedPlainObjectProperty<X> = (X extends null ? {} : X) & {
+export type NonComputedPlainObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
   value: Expression<X>;
@@ -35,7 +35,7 @@ export type NonComputedPlainObjectProperty<X> = (X extends null ? {} : X) & {
   computed: false;
 };
 
-export type ComputedPlainObjectProperty<X> = (X extends null ? {} : X) & {
+export type ComputedPlainObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
   value: Expression<X>;
@@ -51,7 +51,7 @@ export type MethodObjectProperty<X> =
   | NonComputedMethodObjectProperty<X>
   | ComputedMethodObjectProperty<X>;
 
-export type NonComputedMethodObjectProperty<X> = (X extends null ? {} : X) & {
+export type NonComputedMethodObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
   value: FunctionExpression<X>;
@@ -61,7 +61,7 @@ export type NonComputedMethodObjectProperty<X> = (X extends null ? {} : X) & {
   computed: false;
 };
 
-export type ComputedMethodObjectProperty<X> = (X extends null ? {} : X) & {
+export type ComputedMethodObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
   value: FunctionExpression<X>;
@@ -77,7 +77,7 @@ export type GetterObjectProperty<X> =
   | NonComputedGetterObjectProperty<X>
   | ComputedGetterObjectProperty<X>;
 
-export type NonComputedGetterObjectProperty<X> = (X extends null ? {} : X) & {
+export type NonComputedGetterObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
   value: GetterFunctionExpression<X>;
@@ -87,7 +87,7 @@ export type NonComputedGetterObjectProperty<X> = (X extends null ? {} : X) & {
   computed: false;
 };
 
-export type ComputedGetterObjectProperty<X> = (X extends null ? {} : X) & {
+export type ComputedGetterObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
   value: GetterFunctionExpression<X>;
@@ -103,7 +103,7 @@ export type SetterObjectProperty<X> =
   | NonComputedSetterObjectProperty<X>
   | ComputedSetterObjectProperty<X>;
 
-export type NonComputedSetterObjectProperty<X> = (X extends null ? {} : X) & {
+export type NonComputedSetterObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
   value: SetterFunctionExpression<X>;
@@ -113,7 +113,7 @@ export type NonComputedSetterObjectProperty<X> = (X extends null ? {} : X) & {
   computed: false;
 };
 
-export type ComputedSetterObjectProperty<X> = (X extends null ? {} : X) & {
+export type ComputedSetterObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
   value: SetterFunctionExpression<X>;
