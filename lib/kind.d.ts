@@ -3,8 +3,8 @@ import {
   BlockStatement,
   Statement,
   SwitchCase,
-} from "./syntax/statement";
-import { ChainableExpression } from "./syntax/chain";
+} from "./node/statement";
+import { ChainableExpression } from "./node/chain";
 import {
   CallablePattern,
   CallableUpdatePattern,
@@ -13,41 +13,41 @@ import {
   RestablePattern,
   RestablePatternProperty,
   UpdatePattern,
-} from "./syntax/pattern";
-import { ClassEntry, ClassBody } from "./syntax/class";
+} from "./node/pattern";
+import { ClassEntry, ClassBody } from "./node/class";
 import {
   ConstructorFunctionExpression,
   MethodFunctionExpression,
   GetterFunctionExpression,
   SetterFunctionExpression,
-} from "./syntax/function";
-import { Declaration, VariableDeclarator } from "./syntax/declaration";
+} from "./node/function";
+import { Declaration, VariableDeclarator } from "./node/declaration";
 import {
   DefaultDeclaration,
   ExportSpecifier,
   ImportSpecifier,
   ModuleStatement,
   Specifier,
-} from "./syntax/module";
+} from "./node/module";
 import {
   DeclarableExpression,
   Expression,
   PrivatableExpression,
   SpreadableExpression,
   SuperableExpression,
-} from "./syntax/expression";
-import { Program } from "./syntax/program";
-import { Key, KeyIdentifier, PublicKey } from "./syntax/key";
-import { SourceLiteral } from "./syntax/literal";
-import { SpreadableObjectProperty } from "./syntax/object";
-import { TemplateElement, TemplateLiteral } from "./syntax/template";
+} from "./node/expression";
+import { Program } from "./node/program";
+import { Key, KeyIdentifier, PublicKey } from "./node/key";
+import { SourceLiteral } from "./node/literal";
+import { SpreadableObjectProperty } from "./node/object";
+import { TemplateElement, TemplateLiteral } from "./node/template";
 import {
   ConstructorIdentifier,
   KeywordIdentifier,
   LabelIdentifier,
   PublicKeyIdentifier,
   VariableIdentifier,
-} from "./syntax/identifier";
+} from "./node/identifier";
 
 export type KindRecord<X> = {
   MethodFunctionExpression: MethodFunctionExpression<X>;

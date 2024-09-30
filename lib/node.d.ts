@@ -1,5 +1,5 @@
-import { CallExpression, OptionalCallExpression } from "./syntax/call";
-import { ChainExpression } from "./syntax/chain";
+import { CallExpression, OptionalCallExpression } from "./node/call";
+import { ChainExpression } from "./node/chain";
 import {
   ClassExpression,
   ClassDeclaration,
@@ -15,8 +15,8 @@ import {
   NonComputedPropertyDefinition,
   StaticBlock,
   AnonymousClassDeclaration,
-} from "./syntax/class";
-import { VariableDeclaration, VariableDeclarator } from "./syntax/declaration";
+} from "./node/class";
+import { VariableDeclaration, VariableDeclarator } from "./node/declaration";
 import {
   ThisExpression,
   ArrayExpression,
@@ -36,14 +36,14 @@ import {
   MetaProperty,
   ImportExpression,
   AwaitExpression,
-} from "./syntax/expression";
+} from "./node/expression";
 import {
   FunctionExpression,
   ExpressionArrowFunctionExpression,
   BlockArrowFunctionExpression,
   FunctionDeclaration,
   AnonymousFunctionDeclaration,
-} from "./syntax/function";
+} from "./node/function";
 import {
   PublicKeyIdentifier,
   PrivateKeyIdentifier,
@@ -52,7 +52,7 @@ import {
   SpecifierIdentifier,
   KeywordIdentifier,
   ConstructorIdentifier,
-} from "./syntax/identifier";
+} from "./node/identifier";
 import {
   SourceLiteral,
   SpecifierLiteral,
@@ -62,13 +62,13 @@ import {
   BooleanLiteral,
   BigIntLiteral,
   RegExpLiteral,
-} from "./syntax/literal";
+} from "./node/literal";
 import {
   ComputedMemberExpression,
   NonComputedMemberExpression,
   OptionalComputedMemberExpression,
   OptionalNonComputedMemberExpression,
-} from "./syntax/member";
+} from "./node/member";
 import {
   ImportDeclaration,
   RegularImportSpecifier,
@@ -81,7 +81,7 @@ import {
   ExportSpecifier,
   ExportDefaultDeclaration,
   ExportAllDeclaration,
-} from "./syntax/module";
+} from "./node/module";
 import {
   ObjectExpression,
   NonComputedPlainObjectProperty,
@@ -92,7 +92,7 @@ import {
   NonComputedGetterObjectProperty,
   ComputedSetterObjectProperty,
   NonComputedSetterObjectProperty,
-} from "./syntax/object";
+} from "./node/object";
 import {
   NonComputedPatternProperty,
   ComputedPatternProperty,
@@ -100,8 +100,8 @@ import {
   ObjectPattern,
   ArrayPattern,
   AssignmentPattern,
-} from "./syntax/pattern";
-import { ModuleProgram, ScriptProgram } from "./syntax/program";
+} from "./node/pattern";
+import { ModuleProgram, ScriptProgram } from "./node/program";
 import {
   SwitchCase,
   CatchClause,
@@ -123,24 +123,12 @@ import {
   ForInStatement,
   ForOfStatement,
   DebuggerStatement,
-} from "./syntax/statement";
+} from "./node/statement";
 import {
   TaggedTemplateExpression,
   TemplateLiteral,
   TemplateElement,
-} from "./syntax/template";
-
-export type Class<X> =
-  | ClassExpression<X>
-  | ClassDeclaration<X>
-  | AnonymousClassDeclaration<X>;
-
-export type Function<X> =
-  | FunctionExpression<X>
-  | ExpressionArrowFunctionExpression<X>
-  | BlockArrowFunctionExpression<X>
-  | FunctionDeclaration<X>
-  | AnonymousFunctionDeclaration<X>;
+} from "./node/template";
 
 export type Node<X> =
   | CallExpression<X>
