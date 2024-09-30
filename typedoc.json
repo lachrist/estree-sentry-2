@@ -1,9 +1,8 @@
 {
   "entryPoints": ["lib/index.mjs", "lib/**/*.d.ts"],
   "exclude": ["lib/guard.d.ts", "lib/index.d.ts"],
-  "githubPages": true,
   "readme": "none",
-  "out": "page/typedoc",
+  "out": "typedoc",
   "name": "estree-sentry",
   "tsconfig": "tsconfig.json",
   "visibilityFilters": {},
