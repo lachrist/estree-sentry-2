@@ -26,4 +26,4 @@ export type * from "./node.d.ts";
 export type * from "./operator.d.ts";
 export type * from "./path.d.ts";
 
-export type * from "./index.mjs";
+export * from "./index.mjs";
