@@ -16,6 +16,7 @@
   },
   "scripts": {
     "doc": "npx typedoc && open page/typedoc/index.html",
+    "deploy-page": "sh deploy-page.sh",
     "test": "npx c8 -- node test/index.mjs reg",
     "test:cov": "node test/index.mjs cov",
     "test:reg": "node test/index.mjs reg"
