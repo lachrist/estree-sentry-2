@@ -1,12 +1,13 @@
 {
-  "entryPoints": ["lib/index.mjs", "lib/**/*.d.ts"],
-  "exclude": ["lib/guard.d.ts", "lib/index.d.ts"],
+  "entryPoints": ["lib/**/*.d.ts"],
+  "exclude": ["lib/guard.d.ts"],
+  "kindSortOrder": ["Function", "Variable", "TypeAlias"],
   "readme": "none",
   "out": "typedoc",
   "name": "estree-sentry",
   "tsconfig": "tsconfig.json",
   "visibilityFilters": {},
-  "entryPointStrategy": "expand",
+  "entryPointStrategy": "resolve",
   "excludeExternals": true,
   "externalPattern": ["**/node_modules/**"]
 }

@@ -15,7 +15,7 @@
     "typescript": "^5.6.2"
   },
   "scripts": {
-    "doc": "npx typedoc && open page/typedoc/index.html",
+    "doc": "npx typedoc && open typedoc/index.html",
     "deploy-page": "sh deploy-page.sh",
     "test": "npx c8 -- node test/index.mjs reg",
     "test:cov": "node test/index.mjs cov",
