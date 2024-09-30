@@ -1,3 +1,12 @@
+/**
+ * A `kind` is a union of node types that appears as a property value in any
+ * node type. For instance, `KeyIdentifier` appears as the `property` of
+ * `NonComputedMemberExpression` and can either an `Identifier` or a
+ * `PrivateIdentifier`.
+ *
+ * @module
+ */
+
 import {
   CatchClause,
   BlockStatement,

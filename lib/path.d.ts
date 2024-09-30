@@ -1,3 +1,11 @@
+/**
+ * A path is a string made by the concatenating with dots the property keys that
+ * lead to a particular node in the AST. Contrary to JSON path, indexes are not
+ * surrounded by brackets. eg: `"$.body.body.0.declarations.0.init"`.
+ *
+ * @module
+ */
+
 import type { Brand } from "./util/brand";
 
 export type Path = Brand<string, "Path">;
