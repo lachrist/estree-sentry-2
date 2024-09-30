@@ -101,3 +101,68 @@ type system:
 - In assignment expressions, the left-hand side can be a call expression. Yes,
   this is valid JavaScript. I'm not aware of any functions that will make this
   not through a `ReferenceError` though.
+
+## API
+
+[typedoc](https://lachrist.github.io/estree-sentry-2/typedoc/index.html)
+
+The main function is `guardWithAnnotation` which takes a node, an initial path
+and an annotation function. It returns a deep copy of the node with annotations
+if it is a valid EstreeSentry program. It throws a syntax error otherwise.
+
+```javascript
+import { ROOT_PATH, guard } from "estree-sentry";
+// returns: {
+//   type: "Program",
+//   sourceType: "script",
+//   body: [{
+//     type: "EmptyStatement",
+//     path: "$.body.0",
+//     kind: "Statement",
+//   }],
+//   path: "$",
+//   kind: "Program"
+// }
+guardWithAnnotation(
+  {
+    type: "Program",
+    sourceType: "script",
+    body: [
+      {
+        type: "EmptyStatement",
+      },
+    ],
+  },
+  ROOT_PATH,
+  (_node, path, kind) => ({ path, kind }),
+);
+```
+
+```javascript
+import { guard } from "estree-sentry";
+// throws: EstreeSentrySyntaxError
+//  KeyIdentifier.type should be "Identifier" or "PrivateIdentifier"
+//  got "Literal"
+//  at $.body.0.expression.property
+guard({
+  type: "Program",
+  sourceType: "script",
+  body: [
+    {
+      type: "ExpressionStatement",
+      expression: {
+        type: "MemberExpression",
+        computed: false,
+        object: {
+          type: "Identifier",
+          name: "obj",
+        },
+        property: {
+          type: "Literal",
+          value: "key",
+        },
+      },
+    },
+  ],
+});
+```
