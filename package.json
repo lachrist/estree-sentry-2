@@ -3,6 +3,11 @@
   "version": "0.1.1",
   "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.mjs",
+    "!lib/**/*.test.mjs"
+  ],
   "devDependencies": {
     "@types/estree": "^1.0.6",
     "@types/node": "^22.7.4",
