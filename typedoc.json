@@ -1,7 +1,7 @@
 {
   "entryPoints": ["lib/**/*.d.ts"],
   "exclude": ["lib/guard.d.ts"],
-  "kindSortOrder": ["Function", "Variable", "TypeAlias"],
+  "kindSortOrder": ["Class", "Function", "Variable", "TypeAlias"],
   "readme": "none",
   "out": "typedoc",
   "name": "estree-sentry",
