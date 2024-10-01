@@ -55,7 +55,7 @@ system further:
   when used in an expression context and `LabelName` brands the name of
   identifiers when used in a label context.
 
-## Removed nonsensical nodes
+## Removed Nonsensical Nodes
 
 - Module declarations cannot appear in script programs.
 - Optional expressions cannot appear outside chain expressions.
@@ -87,7 +87,7 @@ system further:
   - cannot be a generator
   - cannot be asynchronous
 
-## Additional nodes
+## Additional Nodes
 
 - In binary expressions with `in` operator, the left operand can be a private
   identifier.
@@ -99,64 +99,24 @@ system further:
 
 [typedoc](https://lachrist.github.io/estree-sentry-2/typedoc/index.html)
 
-The main function exported by `estree-sentry` is `guardWithAnnotation` which
-takes a node, an initial path and an annotation function. It returns a deep copy
-of the node with annotations if it is a valid ESTreeSentry program. It throws a
-syntax error otherwise.
-
-```javascript
-import { ROOT_PATH, guard } from "estree-sentry";
-// returns: {
-//   type: "Program",
-//   sourceType: "script",
-//   body: [{
-//     type: "EmptyStatement",
-//     path: "$.body.0",
-//     kind: "Statement",
-//   }],
-//   path: "$",
-//   kind: "Program"
-// }
-guardWithAnnotation(
-  {
-    type: "Program",
-    sourceType: "script",
-    body: [
-      {
-        type: "EmptyStatement",
-      },
-    ],
-  },
-  ROOT_PATH,
-  (_node, path, kind) => ({ path, kind }),
-);
-```
-
-```javascript
-import { guard } from "estree-sentry";
-// throws: EstreeSentrySyntaxError
-//  KeyIdentifier.type should be "Identifier" or "PrivateIdentifier"
-//  got "Literal"
-//  at $.body.0.expression.property
-guard({
-  type: "Program",
-  sourceType: "script",
-  body: [
-    {
-      type: "ExpressionStatement",
-      expression: {
-        type: "MemberExpression",
-        computed: false,
-        object: {
-          type: "Identifier",
-          name: "obj",
-        },
-        property: {
-          type: "Literal",
-          value: "key",
-        },
-      },
-    },
-  ],
-});
-```
+- [Node](https://lachrist.github.io/estree-sentry-2/typedoc/types/node.Node.html)
+  Complete list of node types
+- [KindRecord](https://lachrist.github.io/estree-sentry-2/typedoc/types/kind.KindRecord.html)
+  Grouping of node types as they appear in `Node` properties.
+- [guard](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guard.html)
+  Return a deep copy of the given node if it is a valid ESTreeSentry program.
+  Throws a `EstreeSentrySyntaxError` otherwise.
+- [guardWithAnnotation](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guardwithannotation.html)
+  Return a deep copy of the given node with annotations if it is a valid
+  ESTreeSentry program. Throws a `EstreeSentrySyntaxError` otherwise.
+- [EstreeSentrySyntaxError](https://lachrist.github.io/estree-sentry-2/typedoc/classes/index.EstreeSentrySyntaxError.html)
+  Class of errors thrown by guard functions. It has a `cause` property if the
+  `message` property does not provide enough information.
+- [listChildren](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.listchildren.html)
+  Returns the children of the given node in a new array.
+- [ROOT_PATH](https://lachrist.github.io/estree-sentry-2/typedoc/variables/index.ROOT_PATH.html)
+  The default root path: `"$"`.
+- [splitPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.splitpath.html)
+  Split a path into segments who each represents a property name.
+- [walkPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.walkpath.html)
+  Walk a split path from a root node to a target node.
