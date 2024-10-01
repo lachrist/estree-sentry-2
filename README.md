@@ -106,17 +106,17 @@ system further:
 - [guard](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guard.html)
   Return a deep copy of the given node if it is a valid ESTreeSentry program.
   Throws a `EstreeSentrySyntaxError` otherwise.
-- [guardWithAnnotation](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guardwithannotation.html)
+- [guardWithAnnotation](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guardWithAnnotation.html)
   Return a deep copy of the given node with annotations if it is a valid
   ESTreeSentry program. Throws a `EstreeSentrySyntaxError` otherwise.
 - [EstreeSentrySyntaxError](https://lachrist.github.io/estree-sentry-2/typedoc/classes/index.EstreeSentrySyntaxError.html)
   Class of errors thrown by guard functions. It has a `cause` property if the
   `message` property does not provide enough information.
-- [listChildren](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.listchildren.html)
+- [listChildren](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.listChildren.html)
   Returns the children of the given node in a new array.
 - [ROOT_PATH](https://lachrist.github.io/estree-sentry-2/typedoc/variables/index.ROOT_PATH.html)
   The default root path: `"$"`.
-- [splitPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.splitpath.html)
+- [splitPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.splitPath.html)
   Split a path into segments who each represents a property name.
-- [walkPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.walkpath.html)
+- [walkPath](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.walkPath.html)
   Walk a split path from a root node to a target node.
