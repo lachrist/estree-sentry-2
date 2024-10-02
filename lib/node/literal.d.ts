@@ -1,24 +1,42 @@
 import type { Brand } from "../util/brand";
 
-export type ExpressionLiteral<X> =
-  | SimpleLiteral<X>
-  | BigIntLiteral<X>
+// Literal //
+
+type StringValue = Brand<string, "estree.StringValue">;
+
+type BigIntRepresentation = Brand<string, "estree.BigIntRepresentation">;
+
+export type Literal<X> =
+  | NullLiteral<X>
+  | TrueLiteral<X>
+  | FalseLiteral<X>
+  | NumberLiteral<X>
+  | StringLiteral<X, StringValue>
+  | BigIntLiteral<X, BigIntRepresentation>
   | RegExpLiteral<X>;
 
-export type SimpleLiteral<X> =
-  | StringLiteral<X>
-  | NumberLiteral<X>
-  | BooleanLiteral<X>
-  | NullLiteral<X>;
+// Specifier //
+
+export type SpecifierValue = Brand<string, "estree.SpecifierValue">;
+
+export type SpecifierLiteral<X> = StringLiteral<X, SpecifierValue>;
+
+// Source //
+
+export type SourceValue = Brand<string, "estree.SourceValue">;
+
+export type SourceLiteral<X> = StringLiteral<X, SourceValue>;
+
+// PublicKey //
+
+export type PublicKeyValue = Brand<string, "estree.PublicKeyValue">;
 
 export type PublicKeyLiteral<X> =
-  | StringLiteral<X>
   | NumberLiteral<X>
-  | BooleanLiteral<X>
-  | NullLiteral<X>
-  | BigIntLiteral<X>;
+  | StringLiteral<X, PublicKeyValue>
+  | BigIntLiteral<X, PublicKeyValue>;
 
-// NulLiteral //
+// NullLiteral //
 
 export type NullLiteral<X> = X & {
   type: "Literal";
@@ -30,8 +48,6 @@ export type NullLiteral<X> = X & {
 
 // BooleanLiteran //
 
-export type BooleanLiteral<X> = TrueLiteral<X> | FalseLiteral<X>;
-
 export type TrueLiteral<X> = X & {
   type: "Literal";
   value: true;
@@ -42,7 +58,7 @@ export type TrueLiteral<X> = X & {
 
 export type FalseLiteral<X> = X & {
   type: "Literal";
-  value: boolean;
+  value: false;
   raw: null | "false";
   bigint: null;
   regex: null;
@@ -50,13 +66,11 @@ export type FalseLiteral<X> = X & {
 
 // StringLiteral //
 
-export type StringValue = Brand<string, "estree.StringValue">;
-
 export type StringRawValue = Brand<string, "estree.StringRawValue">;
 
-export type StringLiteral<X> = X & {
+export type StringLiteral<X, V extends string> = X & {
   type: "Literal";
-  value: StringValue;
+  value: V;
   raw: null | StringRawValue;
   bigint: null;
   regex: null;
@@ -64,13 +78,11 @@ export type StringLiteral<X> = X & {
 
 // NumberLiteral //
 
-export type NumberValue = Brand<number, "estree.NumberValue">;
-
 export type NumberRawValue = Brand<string, "estree.NumberRawValue">;
 
 export type NumberLiteral<X> = X & {
   type: "Literal";
-  value: NumberValue;
+  value: number;
   raw: null | NumberRawValue;
   bigint: null;
   regex: null;
@@ -78,15 +90,13 @@ export type NumberLiteral<X> = X & {
 
 // BigIntLiteral //
 
-export type BigIntRepresentation = Brand<string, "estree.BigIntValue">;
-
 export type BigIntRawValue = Brand<string, "estree.BigIntRawValue">;
 
-export type BigIntLiteral<X> = X & {
+export type BigIntLiteral<X, B extends string> = X & {
   type: "Literal";
   value: null;
   raw: null | BigIntRawValue;
-  bigint: BigIntRepresentation;
+  bigint: B;
   regex: null;
 };
 
@@ -111,32 +121,4 @@ export type RegExpLiteral<X> = X & {
     pattern: RegExpPattern;
     flags: RegExpFlagList;
   };
-};
-
-// SourceLiteral //
-
-export type SourceValue = Brand<string, "estree.SourceValue">;
-
-export type SourceRawValue = Brand<string, "estree.SourceRawValue">;
-
-export type SourceLiteral<X> = X & {
-  type: "Literal";
-  value: SourceValue;
-  raw: null | SourceRawValue;
-  bigint: null;
-  regex: null;
-};
-
-// SpecifierLiteral //
-
-export type SpecifierValue = Brand<string, "estree.SpecifierValue">;
-
-export type SpecifierRawValue = Brand<string, "estree.SpecifierRawValue">;
-
-export type SpecifierLiteral<X> = X & {
-  type: "Literal";
-  value: SpecifierValue;
-  raw: null | SpecifierRawValue;
-  bigint: null;
-  regex: null;
 };

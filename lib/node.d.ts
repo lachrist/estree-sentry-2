@@ -47,22 +47,13 @@ import type {
   FunctionDeclaration,
   AnonymousFunctionDeclaration,
 } from "./node/function";
+import type { Identifier, PrivateIdentifier } from "./node/identifier";
 import type {
-  PublicKeyIdentifier,
-  PrivateKeyIdentifier,
-  VariableIdentifier,
-  LabelIdentifier,
-  SpecifierIdentifier,
-  KeywordIdentifier,
-  ConstructorIdentifier,
-} from "./node/identifier";
-import type {
-  SourceLiteral,
-  SpecifierLiteral,
-  StringLiteral,
-  NumberLiteral,
   NullLiteral,
-  BooleanLiteral,
+  TrueLiteral,
+  FalseLiteral,
+  NumberLiteral,
+  StringLiteral,
   BigIntLiteral,
   RegExpLiteral,
 } from "./node/literal";
@@ -133,6 +124,28 @@ import type {
   TemplateElement,
 } from "./node/template";
 
+export type SimpleLiteral<X> =
+  | NullLiteral<X>
+  | TrueLiteral<X>
+  | FalseLiteral<X>
+  | BooleanLiteral<X>
+  | NumberLiteral<X>
+  | StringLiteral<X, string>;
+
+export type BooleanLiteral<X> = TrueLiteral<X> | FalseLiteral<X>;
+
+export type Function<X> =
+  | FunctionExpression<X>
+  | ExpressionArrowFunctionExpression<X>
+  | BlockArrowFunctionExpression<X>
+  | FunctionDeclaration<X>
+  | AnonymousFunctionDeclaration<X>;
+
+export type Class<X> =
+  | ClassExpression<X>
+  | ClassDeclaration<X>
+  | AnonymousClassDeclaration<X>;
+
 export type Node<X> =
   | CallExpression<X>
   | OptionalCallExpression<X>
@@ -176,20 +189,14 @@ export type Node<X> =
   | BlockArrowFunctionExpression<X>
   | FunctionDeclaration<X>
   | AnonymousFunctionDeclaration<X>
-  | PublicKeyIdentifier<X>
-  | PrivateKeyIdentifier<X>
-  | VariableIdentifier<X>
-  | LabelIdentifier<X>
-  | SpecifierIdentifier<X>
-  | KeywordIdentifier<X>
-  | ConstructorIdentifier<X>
-  | SourceLiteral<X>
-  | SpecifierLiteral<X>
-  | StringLiteral<X>
-  | NumberLiteral<X>
+  | Identifier<X, string>
+  | PrivateIdentifier<X, string>
   | NullLiteral<X>
-  | BooleanLiteral<X>
-  | BigIntLiteral<X>
+  | TrueLiteral<X>
+  | FalseLiteral<X>
+  | NumberLiteral<X>
+  | StringLiteral<X, string>
+  | BigIntLiteral<X, string>
   | RegExpLiteral<X>
   | ComputedMemberExpression<X>
   | NonComputedMemberExpression<X>

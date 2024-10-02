@@ -12,40 +12,28 @@ export type FunctionExpression<X> = X & {
   body: BlockStatement<X>;
 };
 
-export type ConstructorFunctionExpression<X> = X & {
-  type: "FunctionExpression";
+export type ConstructorFunctionExpression<X> = FunctionExpression<X> & {
   id: null;
   async: false;
   generator: false;
-  params: RestablePattern<X>[];
-  body: BlockStatement<X>;
 };
 
-export type MethodFunctionExpression<X> = X & {
-  type: "FunctionExpression";
+export type MethodFunctionExpression<X> = FunctionExpression<X> & {
   id: null;
-  async: boolean;
-  generator: boolean;
-  params: RestablePattern<X>[];
-  body: BlockStatement<X>;
 };
 
-export type GetterFunctionExpression<X> = X & {
-  type: "FunctionExpression";
+export type GetterFunctionExpression<X> = FunctionExpression<X> & {
   id: null;
   async: false;
   generator: false;
   params: [];
-  body: BlockStatement<X>;
 };
 
-export type SetterFunctionExpression<X> = X & {
-  type: "FunctionExpression";
+export type SetterFunctionExpression<X> = FunctionExpression<X> & {
   id: null;
   async: false;
   generator: false;
   params: [Pattern<X>];
-  body: BlockStatement<X>;
 };
 
 export type ArrowFunctionExpression<X> =

@@ -50,10 +50,10 @@ system further:
     "foo": 123
   }
   ```
-- Arbitrary strings and numbers are branded to make types more explicit and
-  prevent mix-ups. For instance, `VariableName` brands the name of identifiers
-  when used in an expression context and `LabelName` brands the name of
-  identifiers when used in a label context.
+- Arbitrary strings are branded to make types more explicit and prevent mix-ups.
+  For instance, `VariableName` brands the name of identifiers when used in an
+  expression context and `LabelName` brands the name of identifiers when used in
+  a label context.
 
 ## Removed Nonsensical Nodes
 

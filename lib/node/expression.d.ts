@@ -18,7 +18,7 @@ import type {
   CallableUpdatePattern,
   UpdatePattern,
 } from "./pattern";
-import type { ExpressionLiteral } from "./literal";
+import type { Literal } from "./literal";
 import type { ObjectExpression } from "./object";
 import type { MemberExpression } from "./member";
 import type { TaggedTemplateExpression, TemplateLiteral } from "./template";
@@ -39,7 +39,7 @@ export type Expression<X> =
   | FunctionExpression<X>
   | VariableIdentifier<X>
   | ImportExpression<X>
-  | ExpressionLiteral<X>
+  | Literal<X>
   | LogicalExpression<X>
   | MemberExpression<X>
   | MetaProperty<X>
