@@ -2,7 +2,7 @@ import { generate } from "astring";
 import { parse } from "acorn";
 import {
   EstreeSentrySyntaxError,
-  guardWithAnnotation,
+  annotateProgram,
   ROOT_PATH,
   splitPath,
   walkPath,
@@ -53,7 +53,7 @@ export const pass = (code, type = "script") => {
       ? parse(code, { ecmaVersion: 2024, sourceType: type })
       : code;
   const code1 = generate(root1);
-  const root2 = guardWithAnnotation(root1, ROOT_PATH, compileAnnotate());
+  const root2 = annotateProgram(root1, ROOT_PATH, compileAnnotate());
   checkNode(root2, root2);
   const code2 = generate(root2);
   if (code1 !== code2) {
@@ -72,7 +72,7 @@ export const fail = (code, type = "script") => {
       ? parse(code, { ecmaVersion: 2024, sourceType: type })
       : code;
   try {
-    guardWithAnnotation(root1, ROOT_PATH, compileAnnotate());
+    annotateProgram(root1, ROOT_PATH, compileAnnotate());
   } catch (error) {
     if (!(error instanceof EstreeSentrySyntaxError)) {
       throw error;

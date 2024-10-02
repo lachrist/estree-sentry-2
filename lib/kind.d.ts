@@ -65,6 +65,8 @@ export type KindRecord<X> = {
   SetterFunctionExpression: SetterFunctionExpression<X>;
   DeclarableExpression: DeclarableExpression<X>;
   Program: Program<X>;
+  ScriptProgram: Program<X>;
+  ModuleProgram: Program<X>;
   Expression: Expression<X>;
   SpreadableExpression: SpreadableExpression<X>;
   SuperableExpression: SuperableExpression<X>;

@@ -19,3 +19,9 @@ export type Subguard<N extends { type: string }> = (
   type: N["type"],
   kind: Kind,
 ) => N & AnnotationBrand;
+
+export type AnyGuard<N> = <X>(
+  node: object,
+  path: Path,
+  annotate: Annotate<X>,
+) => N;

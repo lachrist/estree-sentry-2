@@ -8,7 +8,11 @@ import type {
 } from "./keyword.d.ts";
 import type { KindRecord } from "./kind.d.ts";
 import type { Node } from "./node.d.ts";
-import type { Program } from "./node/program.d.ts";
+import type {
+  ModuleProgram,
+  Program,
+  ScriptProgram,
+} from "./node/program.d.ts";
 import type {
   AssignmentOperator,
   BinaryOperator,
@@ -45,6 +49,142 @@ export type * from "./kind.d.ts";
 export type * from "./node.d.ts";
 export type * from "./operator.d.ts";
 export type * from "./path.d.ts";
+
+///////////
+// index //
+///////////
+
+/**
+ *
+ * Returns a deep annotated copy of the input node with annotations if it is a
+ * valid estree-sentry program. Throws a `EstreeSentrySyntaxError` if the input
+ * node is not a valid estree-sentry program. See `guard` for a failing example.
+ *
+ * @example
+ * ```js
+ * import { ROOT_PATH, annotateProgram } from "estree-sentry";
+ * // returns: {
+ * //   type: "Program",
+ * //   sourceType: "script",
+ * //   body: [{
+ * //     type: "EmptyStatement",
+ * //     path: "$.body.0",
+ * //     kind: "Statement",
+ * //   }],
+ * //   path: "$",
+ * //   kind: "Program"
+ * // }
+ * annotateProgram(
+ *   {
+ *     type: "Program",
+ *     sourceType: "script",
+ *     body: [
+ *       {
+ *         type: "EmptyStatement",
+ *       },
+ *     ],
+ *   },
+ *   ROOT_PATH,
+ *   (_node, path, kind) => ({ path, kind }),
+ * );
+ * ```
+ *
+ * @template A
+ * The type of the annotation.
+ * @param root
+ * The input root node.
+ * @param path
+ * The root path to which segments will be appended.
+ * @param annotate
+ * Annotation function that will be called on each visited node.
+ * @returns
+ * A deep copy of the input root node that is a valid estree-sentry program.
+ * @throws
+ * An `EstreeSentrySyntaxError` if the input root node is not a valid
+ * estree-sentry program.
+ *
+ */
+export const annotateProgram: <A>(
+  root: object,
+  path: Path,
+  annotate: Annotate<A>,
+) => Program<A>;
+
+/**
+ * Same as `annotateProgram` but for module programs.
+ */
+export const annotateModuleProgram: <A>(
+  root: object,
+  path: Path,
+  annotate: Annotate<A>,
+) => ModuleProgram<A>;
+
+/**
+ * Same as `annotateProgram` but for script programs.
+ */
+export const annotateScriptProgram: <A>(
+  root: object,
+  path: Path,
+  annotate: Annotate<A>,
+) => ScriptProgram<A>;
+
+/**
+ *
+ * Returns a deep copy of the input node if it is a valid estree-sentry program.
+ * Throws a `EstreeSentrySyntaxError` if the input node is not a valid
+ * estree-sentry program.
+ *
+ * @example
+ * ```js
+ * import { guardProgram } from "estree-sentry";
+ * // throws: EstreeSentrySyntaxError
+ * //  KeyIdentifier.type should be "Identifier" or "PrivateIdentifier"
+ * //  got "Literal"
+ * //  at $.body.0.expression.property
+ * guardProgram(
+ *   {
+ *     type: "Program",
+ *     sourceType: "script",
+ *     body: [
+ *       {
+ *         type: "ExpressionStatement",
+ *         expression: {
+ *           type: "MemberExpression",
+ *           computed: false,
+ *           object: {
+ *             type: "Identifier",
+ *             name: "obj",
+ *           },
+ *           property: {
+ *             type: "Literal",
+ *             value: "key",
+ *           },
+ *         },
+ *       },
+ *     ],
+ *   },
+ * );
+ * ```
+ *
+ * @param root
+ * The input root node.
+ * @returns
+ * A deep copy of the input root node that is a valid estree-sentry program.
+ * @throws
+ * An `EstreeSentrySyntaxError` if the input root node is not a valid
+ * estree-sentry program.
+ */
+export const guardProgram: (root: object) => Program<{}>;
+
+/**
+ * Same as `guardProgram` but for module programs.
+ */
+export const guardModuleProgram: (root: object) => ModuleProgram<{}>;
+
+/**
+ * Same as `guardProgram` but for script programs.
+ */
+export const guardScriptProgram: (root: object) => ScriptProgram<{}>;
 
 //////////////
 // children //
@@ -261,111 +401,3 @@ export const walkPath: <A>(
   segments: Segment[],
   root: Node<A> | Node<A>[],
 ) => null | Node<A> | Node<A>[];
-
-///////////
-// index //
-///////////
-
-/**
- *
- * Returns a deep annotated copy of the input node with annotations if it is a
- * valid estree-sentry program. Throws a `EstreeSentrySyntaxError` if the input
- * node is not a valid estree-sentry program. See `guard` for a failing example.
- *
- * @example
- * ```js
- * import { ROOT_PATH, guard } from "estree-sentry";
- * // returns: {
- * //   type: "Program",
- * //   sourceType: "script",
- * //   body: [{
- * //     type: "EmptyStatement",
- * //     path: "$.body.0",
- * //     kind: "Statement",
- * //   }],
- * //   path: "$",
- * //   kind: "Program"
- * // }
- * guardWithAnnotation(
- *   {
- *     type: "Program",
- *     sourceType: "script",
- *     body: [
- *       {
- *         type: "EmptyStatement",
- *       },
- *     ],
- *   },
- *   ROOT_PATH,
- *   (_node, path, kind) => ({ path, kind }),
- * );
- * ```
- *
- * @template A
- * The type of the annotation.
- * @param root
- * The input root node.
- * @param path
- * The root path to which segments will be appended.
- * @param annotate
- * Annotation function that will be called on each visited node.
- * @returns
- * A deep copy of the input root node that is a valid estree-sentry program.
- * @throws
- * An `EstreeSentrySyntaxError` if the input root node is not a valid
- * estree-sentry program.
- *
- */
-export const guardWithAnnotation: <A>(
-  root: object,
-  path: Path,
-  annotate: Annotate<A>,
-) => Program<A>;
-
-/**
- *
- * Returns a deep copy of the input node if it is a valid estree-sentry program.
- * Throws a `EstreeSentrySyntaxError` if the input node is not a valid
- * estree-sentry program.
- *
- * @example
- * ```js
- * import { guard } from "estree-sentry";
- * // throws: EstreeSentrySyntaxError
- * //  KeyIdentifier.type should be "Identifier" or "PrivateIdentifier"
- * //  got "Literal"
- * //  at $.body.0.expression.property
- * guard(
- *   {
- *     type: "Program",
- *     sourceType: "script",
- *     body: [
- *       {
- *         type: "ExpressionStatement",
- *         expression: {
- *           type: "MemberExpression",
- *           computed: false,
- *           object: {
- *             type: "Identifier",
- *             name: "obj",
- *           },
- *           property: {
- *             type: "Literal",
- *             value: "key",
- *           },
- *         },
- *       },
- *     ],
- *   },
- * );
- * ```
- *
- * @param root
- * The input root node.
- * @returns
- * A deep copy of the input root node that is a valid estree-sentry program.
- * @throws
- * An `EstreeSentrySyntaxError` if the input root node is not a valid
- * estree-sentry program.
- */
-export const guard: (root: object) => Program<{}>;

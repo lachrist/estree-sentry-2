@@ -103,10 +103,10 @@ system further:
   Complete list of node types
 - [KindRecord](https://lachrist.github.io/estree-sentry-2/typedoc/types/kind.KindRecord.html)
   Grouping of node types as they appear in `Node` properties.
-- [guard](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guard.html)
+- [guardProgram](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guardProgram.html)
   Return a deep copy of the given node if it is a valid ESTreeSentry program.
   Throws a `EstreeSentrySyntaxError` otherwise.
-- [guardWithAnnotation](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.guardWithAnnotation.html)
+- [annotateProgram](https://lachrist.github.io/estree-sentry-2/typedoc/functions/index.annotateProgram.html)
   Return a deep copy of the given node with annotations if it is a valid
   ESTreeSentry program. Throws a `EstreeSentrySyntaxError` otherwise.
 - [EstreeSentrySyntaxError](https://lachrist.github.io/estree-sentry-2/typedoc/classes/index.EstreeSentrySyntaxError.html)

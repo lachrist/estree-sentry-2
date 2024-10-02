@@ -1,6 +1,6 @@
 {
   "name": "estree-sentry",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "files": [
@@ -12,6 +12,8 @@
     "estree",
     "sentry",
     "guard",
+    "validate",
+    "typecheck",
     "escmascript",
     "typescript",
     "annotation"
