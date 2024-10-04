@@ -8,13 +8,13 @@ import type { Path } from "./path";
  *
  * @template A
  * The type of the annotation.
- * @param {object} node
+ * @param node
  * The input node -- eg: `{type: "Identifier", name: "foo"}`.
- * @param {Path} path
+ * @param path
  * The path to the input node -- eg: `"$.body.body.0.expression.property"`.
- * @param {Kind} kind
+ * @param kind
  * The kind of the input node -- eg: `"PublicKey"`.
- * @returns {A}
+ * @returns
  * The annotation whose properties will be added to the output node -- eg:
  * `{ loc: { start: { line: 12, column: 34 } } }`.
  */
