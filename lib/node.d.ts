@@ -78,8 +78,8 @@ import type {
 } from "./node/module";
 import type {
   ObjectExpression,
-  NonComputedPlainObjectProperty,
-  ComputedPlainObjectProperty,
+  NonComputedValueObjectProperty,
+  ComputedValueObjectProperty,
   NonComputedMethodObjectProperty,
   ComputedMethodObjectProperty,
   ComputedGetterObjectProperty,
@@ -123,16 +123,6 @@ import type {
   TemplateLiteral,
   TemplateElement,
 } from "./node/template";
-
-export type SimpleLiteral<X> =
-  | NullLiteral<X>
-  | TrueLiteral<X>
-  | FalseLiteral<X>
-  | BooleanLiteral<X>
-  | NumberLiteral<X>
-  | StringLiteral<X, string>;
-
-export type BooleanLiteral<X> = TrueLiteral<X> | FalseLiteral<X>;
 
 export type Function<X> =
   | FunctionExpression<X>
@@ -214,8 +204,8 @@ export type Node<X> =
   | ExportDefaultDeclaration<X>
   | ExportAllDeclaration<X>
   | ObjectExpression<X>
-  | NonComputedPlainObjectProperty<X>
-  | ComputedPlainObjectProperty<X>
+  | NonComputedValueObjectProperty<X>
+  | ComputedValueObjectProperty<X>
   | NonComputedMethodObjectProperty<X>
   | ComputedMethodObjectProperty<X>
   | ComputedGetterObjectProperty<X>

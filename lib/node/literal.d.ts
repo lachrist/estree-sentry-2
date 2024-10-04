@@ -7,13 +7,17 @@ type StringValue = Brand<string, "estree.StringValue">;
 type BigIntRepresentation = Brand<string, "estree.BigIntRepresentation">;
 
 export type Literal<X> =
-  | NullLiteral<X>
-  | TrueLiteral<X>
-  | FalseLiteral<X>
-  | NumberLiteral<X>
-  | StringLiteral<X, StringValue>
+  | SimpleLiteral<X>
   | BigIntLiteral<X, BigIntRepresentation>
   | RegExpLiteral<X>;
+
+export type SimpleLiteral<X> =
+  | NullLiteral<X>
+  | BooleanLiteral<X>
+  | NumberLiteral<X>
+  | StringLiteral<X, string>;
+
+export type BooleanLiteral<X> = TrueLiteral<X> | FalseLiteral<X>;
 
 // Specifier //
 

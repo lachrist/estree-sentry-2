@@ -9,10 +9,28 @@ import type { PublicKey } from "./key";
 export type SpreadableObjectProperty<X> = SpreadElement<X> | ObjectProperty<X>;
 
 export type ObjectProperty<X> =
-  | PlainObjectProperty<X>
+  | ValueObjectProperty<X>
   | MethodObjectProperty<X>
-  | SetterObjectProperty<X>
-  | GetterObjectProperty<X>;
+  | GetterObjectProperty<X>
+  | SetterObjectProperty<X>;
+
+export type ValueObjectProperty<X> =
+  | NonComputedValueObjectProperty<X>
+  | ComputedValueObjectProperty<X>;
+
+export type MethodObjectProperty<X> =
+  | NonComputedMethodObjectProperty<X>
+  | ComputedMethodObjectProperty<X>;
+
+export type GetterObjectProperty<X> =
+  | NonComputedGetterObjectProperty<X>
+  | ComputedGetterObjectProperty<X>;
+
+export type SetterObjectProperty<X> =
+  | NonComputedSetterObjectProperty<X>
+  | ComputedSetterObjectProperty<X>;
+
+// object //
 
 export type ObjectExpression<X> = X & {
   type: "ObjectExpression";
@@ -21,11 +39,7 @@ export type ObjectExpression<X> = X & {
 
 // value //
 
-export type PlainObjectProperty<X> =
-  | NonComputedPlainObjectProperty<X>
-  | ComputedPlainObjectProperty<X>;
-
-export type NonComputedPlainObjectProperty<X> = X & {
+export type NonComputedValueObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
   value: Expression<X>;
@@ -35,7 +49,7 @@ export type NonComputedPlainObjectProperty<X> = X & {
   computed: false;
 };
 
-export type ComputedPlainObjectProperty<X> = X & {
+export type ComputedValueObjectProperty<X> = X & {
   type: "Property";
   key: Expression<X>;
   value: Expression<X>;
@@ -46,10 +60,6 @@ export type ComputedPlainObjectProperty<X> = X & {
 };
 
 // method //
-
-export type MethodObjectProperty<X> =
-  | NonComputedMethodObjectProperty<X>
-  | ComputedMethodObjectProperty<X>;
 
 export type NonComputedMethodObjectProperty<X> = X & {
   type: "Property";
@@ -73,10 +83,6 @@ export type ComputedMethodObjectProperty<X> = X & {
 
 // getter //
 
-export type GetterObjectProperty<X> =
-  | NonComputedGetterObjectProperty<X>
-  | ComputedGetterObjectProperty<X>;
-
 export type NonComputedGetterObjectProperty<X> = X & {
   type: "Property";
   key: PublicKey<X>;
@@ -98,10 +104,6 @@ export type ComputedGetterObjectProperty<X> = X & {
 };
 
 // setter //
-
-export type SetterObjectProperty<X> =
-  | NonComputedSetterObjectProperty<X>
-  | ComputedSetterObjectProperty<X>;
 
 export type NonComputedSetterObjectProperty<X> = X & {
   type: "Property";
