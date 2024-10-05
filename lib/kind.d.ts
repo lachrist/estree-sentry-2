@@ -13,7 +13,10 @@ import type {
   Statement,
   SwitchCase,
 } from "./node/statement";
-import type { ChainableExpression } from "./node/chain";
+import type {
+  ChainableExpression,
+  SuperableChainableExpression,
+} from "./node/chain";
 import type {
   CallablePattern,
   CallableUpdatePattern,
@@ -59,6 +62,7 @@ import type {
 } from "./node/identifier";
 
 export type KindRecord<X> = {
+  SuperableChainableExpression: SuperableChainableExpression<X>;
   MethodFunctionExpression: MethodFunctionExpression<X>;
   ConstructorFunctionExpression: ConstructorFunctionExpression<X>;
   GetterFunctionExpression: GetterFunctionExpression<X>;

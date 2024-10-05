@@ -1,11 +1,13 @@
-import type { OptionalCallExpression } from "./call";
-import type { Expression } from "./expression";
-import type { OptionalMemberExpression } from "./member";
+import type { ChainCallExpression } from "./call";
+import type { Expression, Super } from "./expression";
+import type { ChainMemberExpression } from "./member";
 
 export type ChainableExpression<X> =
-  | OptionalCallExpression<X>
-  | OptionalMemberExpression<X>
+  | ChainCallExpression<X>
+  | ChainMemberExpression<X>
   | Expression<X>;
+
+export type SuperableChainableExpression<X> = Super<X> | ChainableExpression<X>;
 
 export type ChainExpression<X> = X & {
   type: "ChainExpression";

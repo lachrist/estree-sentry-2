@@ -1,4 +1,8 @@
-import type { CallExpression, OptionalCallExpression } from "./node/call";
+import type {
+  CallExpression,
+  OptionalChainCallExpression,
+  NonOptionalChainCallExpression,
+} from "./node/call";
 import type { ChainExpression } from "./node/chain";
 import type {
   ClassExpression,
@@ -60,8 +64,10 @@ import type {
 import type {
   ComputedMemberExpression,
   NonComputedMemberExpression,
-  OptionalComputedMemberExpression,
-  OptionalNonComputedMemberExpression,
+  ComputedOptionalChainMemberExpression,
+  NonComputedOptionalChainMemberExpression,
+  ComputedNonOptionalChainMemberExpression,
+  NonComputedNonOptionalChainMemberExpression,
 } from "./node/member";
 import type {
   ImportDeclaration,
@@ -138,7 +144,8 @@ export type Class<X> =
 
 export type Node<X> =
   | CallExpression<X>
-  | OptionalCallExpression<X>
+  | OptionalChainCallExpression<X>
+  | NonOptionalChainCallExpression<X>
   | ChainExpression<X>
   | ClassExpression<X>
   | ClassDeclaration<X>
@@ -190,8 +197,10 @@ export type Node<X> =
   | RegExpLiteral<X>
   | ComputedMemberExpression<X>
   | NonComputedMemberExpression<X>
-  | OptionalComputedMemberExpression<X>
-  | OptionalNonComputedMemberExpression<X>
+  | ComputedOptionalChainMemberExpression<X>
+  | NonComputedOptionalChainMemberExpression<X>
+  | ComputedNonOptionalChainMemberExpression<X>
+  | NonComputedNonOptionalChainMemberExpression<X>
   | ImportDeclaration<X>
   | RegularImportSpecifier<X>
   | ImportDefaultSpecifier<X>
